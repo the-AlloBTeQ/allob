@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import { 
-  Calculator, FileText,  Award, Users, Target, ArrowRight, 
+  Calculator, FileText, Award, Users, Target, ArrowRight, 
   ChevronLeft, ChevronRight, Play, Pause
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
+  // State management
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [serviceIndex, setServiceIndex] = useState(0);
 
-
+  // Stats data
   const stats = [
     { label: 'Years of Experience', value: '8+', icon: Award },
     { label: 'Served Clients', value: '100+', icon: Users },
@@ -17,6 +19,7 @@ const LandingPage = () => {
     { label: 'Client Satisfaction', value: '98%', icon: Target }
   ];
 
+  // Main services data
   const mainServices = [
     {
       title: 'Accounting Services',
@@ -44,6 +47,7 @@ const LandingPage = () => {
     }
   ];
 
+  // Insight carousels data
   const insightCarousels = [
     {
       title: 'Accounting Insight',
@@ -77,6 +81,7 @@ const LandingPage = () => {
     }
   ];
 
+  // Tools data
   const tools = [
     {
       category: 'Accounting Tools',
@@ -110,7 +115,16 @@ const LandingPage = () => {
     }
   ];
 
-  // Auto-advance carousel
+  // Auto-rotate hero service cards (3 seconds)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setServiceIndex((prev) => (prev + 1) % mainServices.length);
+    }, 3000);
+    
+    return () => clearInterval(timer);
+  }, [mainServices.length]);
+
+  // Auto-advance main carousel (5 seconds) - only when autoplay is on
   useEffect(() => {
     if (!isAutoPlaying) return;
     
@@ -131,12 +145,11 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-
-
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-cyan-300 via-cyan-800 to-cyan-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Text Content */}
             <div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 Transforming Business Challenges into 
@@ -150,29 +163,73 @@ const LandingPage = () => {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/contact">
-                <button className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                  Schedule Consultation
-                </button>
-</Link>
-                <Link to="/services" >
-                <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
-                  View Services
-                </button>
+                  <button className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                    Schedule Consultation
+                  </button>
+                </Link>
+                <Link to="/services">
+                  <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+                    View Services
+                  </button>
                 </Link>
               </div>
             </div>
             
+            {/* Right Column - Animated Service Cards */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
               <div className="bg-blue-600 text-white text-center py-3 rounded-lg mb-4">
-                <span className="font-semibold">List of Services</span>
+                <span className="font-semibold">Our Core Services</span>
               </div>
-              <div className="h-64 bg-white/5 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <ArrowRight className="w-8 h-8" />
+              
+              <div className="relative h-64 overflow-hidden rounded-lg">
+                {/* Animated cards */}
+                {mainServices.map((service, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-all duration-500 transform ${
+                      index === serviceIndex
+                        ? 'translate-x-0 opacity-100'
+                        : index < serviceIndex
+                        ? '-translate-x-full opacity-0'
+                        : 'translate-x-full opacity-0'
+                    }`}
+                  >
+                    <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg p-6 h-full flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-2xl font-bold text-white mb-3">
+                          {service.title}
+                        </h3>
+                        <p className="text-blue-100 text-sm mb-4">{service.description}</p>
+                        <div className="text-xl font-bold text-yellow-300">
+                          {service.pricing}
+                        </div>
+                      </div>
+                      
+                      <Link 
+                        to={service.link}
+                        className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors font-semibold text-center flex items-center justify-center"
+                      >
+                        Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                      </Link>
+                    </div>
                   </div>
-                  <p className="text-blue-100">Interactive Service Showcase</p>
-                </div>
+                ))}
+              </div>
+              
+              {/* Progress indicators */}
+              <div className="flex justify-center gap-2 mt-4">
+                {mainServices.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setServiceIndex(index)}
+                    className={`h-2 rounded-full transition-all ${
+                      index === serviceIndex 
+                        ? 'w-8 bg-blue-400' 
+                        : 'w-2 bg-white/30'
+                    }`}
+                    aria-label={`Go to service ${index + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -279,7 +336,7 @@ const LandingPage = () => {
                   <p className="text-sm text-gray-600">Digital contract repository at your fingertips</p>
                 </div>
               </div>
-              <a href="https://www.fynanckit.com" className="w-full mt-6" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.fynanckit.com" target="_blank" rel="noopener noreferrer">
                 <button className="w-full mt-6 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
                   Try FynancKit
                 </button>
@@ -310,7 +367,7 @@ const LandingPage = () => {
                   <span>✓ Proactive planning</span>
                 </div>
               </div>
-              <Link to="/paye-calculator" className="w-full mt-6">
+              <Link to="/paye-calculator">
                 <button className="w-full mt-6 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold">
                   Calculate My PAYE
                 </button>
@@ -356,6 +413,7 @@ const LandingPage = () => {
                     className={`w-3 h-3 rounded-full transition-colors ${
                       currentSlide === index ? 'bg-blue-600' : 'bg-gray-300'
                     }`}
+                    aria-label={`Go to slide ${index + 1}`}
                   />
                 ))}
               </div>
@@ -364,18 +422,21 @@ const LandingPage = () => {
                 <button
                   onClick={() => setIsAutoPlaying(!isAutoPlaying)}
                   className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors"
+                  aria-label={isAutoPlaying ? 'Pause autoplay' : 'Resume autoplay'}
                 >
                   {isAutoPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                 </button>
                 <button
                   onClick={prevSlide}
                   className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors"
+                  aria-label="Previous slide"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={nextSlide}
                   className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors"
+                  aria-label="Next slide"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -405,19 +466,11 @@ const LandingPage = () => {
                           ))}
                         </div>
                         
-                        {service.link ? (
-                          <Link to={service.link}>
-                            <button className="mt-8 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
-                              Learn More
-                            </button>
-                          </Link>
-                        ) : (
-                          <Link to="/services">
-                            <button className="mt-8 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
-                              Learn More
-                            </button>
-                          </Link>
-                        )}
+                        <Link to={service.link || '/services'}>
+                          <button className="mt-8 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                            Learn More
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -444,7 +497,7 @@ const LandingPage = () => {
             Experience the perfect blend of integrity and innovation. Get expert advice on 
             accounting, tax planning, and business strategy with our custom digital tools.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
               <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 font-semibold transition-colors">
                 Schedule Free Consultation
@@ -456,7 +509,6 @@ const LandingPage = () => {
               </button>
             </Link>
           </div>
-
         </div>
       </section>
     </div>

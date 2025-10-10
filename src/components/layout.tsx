@@ -36,7 +36,7 @@ const Layout = ({ children }: LayoutProps) => {
             <div className="flex items-center">
               <Link to="/" className="flex-shrink-0 flex items-center group">
                 <img 
-                  src="/src/assets/logo.png" 
+                  src="/logo.png" 
                   alt="AlloB Consultants Logo" 
                   className="h-10 w-auto mr-2"
                 />
