@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+@media print {
+  /* Remove unnecessary elements */
+  .navbar, .sidebar, .header-image, .back-to-articles, .share-buttons, .footer {
+    display: none;
+  }
+
+  /* Ensure body has proper margins */
+  body {
+    margin: 20mm;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  /* Make sure article container takes full width */
+  .article-container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Style headings for print */
+  h1, h2, h3 {
+    color: #000;
+    page-break-after: avoid;
+  }
+
+  /* Preserve block quotes */
+  blockquote {
+    border-left: 4px solid #007bff;
+    margin: 1rem 0;
+    padding-left: 1rem;
+    font-style: italic;
+  }
+
+  /* Handle side-by-side boxes */
+  .side-by-side {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .box {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+
+  /* Ensure images are included */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Fix spacing */
+  p, ul, ol {
+    margin: 1rem 0;
+  }
+
+  /* Optional: Force page breaks between sections */
+  .section {
+    break-before: always;
+  }
+}
