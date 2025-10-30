@@ -33,7 +33,11 @@ export interface TaxDeductions {
     travelAllowance: number;
     businessExpenses: number;
     total: number;
+        pensionFund: number;
+    medicalAid: number;
+    other: number;
 }
+
 
 // Tax calculation result interface
 export interface TaxCalculationResult {

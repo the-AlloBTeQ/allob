@@ -5,6 +5,56 @@
 @tailwind utilities;
 
 
+@media print {
+    /* Prevent page breaks inside these containers */
+    .section,
+    .card,
+    .dashboard,
+    .emp-section > div:not(:last-child),
+    .working-conditions,
+    .action-box,
+    .protips-box,
+    .client-info,
+    .tax-bracket-box {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Ensure sections start on a new page if they won’t fit */
+    .section {
+      page-break-before: auto;
+    }
+
+    /* Avoid breaking within table-like rows or key rows */
+    .dashboard-grid,
+    .client-info-grid,
+    .emp-grid {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Keep related items together */
+    .condition-item {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Improve spacing for print */
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      background: white !important;
+    }
+
+    .container {
+      padding: 10px !important;
+    }
+
+    /* Ensure iframe preview doesn’t interfere — not needed in print */
+    iframe {
+      display: none !important;
+    }
+}
 
 body {
   font-family: 'Inter', sans-serif;

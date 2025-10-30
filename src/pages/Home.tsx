@@ -367,7 +367,7 @@ const LandingPage = () => {
                   <span>✓ Proactive planning</span>
                 </div>
               </div>
-              <Link to="/paye-calculator">
+              <Link to="/TaxCalculator">
                 <button className="w-full mt-6 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold">
                   Calculate My PAYE
                 </button>
