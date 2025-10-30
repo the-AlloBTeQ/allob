@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  
+  base: '/',
   build: {
     // Increase chunk size warning limit to 1MB (from default 500KB)
     chunkSizeWarningLimit: 1000,
