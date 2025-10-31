@@ -942,7 +942,7 @@ const TaxCalculator = () => {
                                 <div className="flex items-start space-x-3">
                                     <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
                                     <div>
-                                        <h4 className="font-semibold text-red-800 mb-2">Please fix the following errors:</h4>
+                                        <h4 className="font-semibold text-red-800 mb-2">Complete these fields:</h4>
                                         <ul className="space-y-1">
                                             {validation.errors.map((error, index) => (
                                                 <li key={index} className="text-red-700 text-sm">• {error}</li>
