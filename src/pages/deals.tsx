@@ -305,8 +305,8 @@ const DealsPage = () => {
   const stats = [
     { value: "8+", label: "Years of Experience", icon: Award },
     { value: "6", label: "Target Sectors", icon: FileSearch },
-    { value: "15+", label: "Financing Partners", icon: Users2 },
-    { value: "98%", label: "Client Satisfaction", icon: TrendingUp }
+    { value: "5+", label: "Financing Partners", icon: Users2 },
+    //{ value: "98%", label: "Client Satisfaction", icon: TrendingUp }
   ];
 
   const containerVariants = {
