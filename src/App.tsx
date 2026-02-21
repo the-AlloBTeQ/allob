@@ -8,6 +8,7 @@ import Booking from './pages/booking'
 
 // Lazy load all other components
 const Services = lazy(() => import('./pages/Services'))
+const Deals = lazy(() => import('./pages/deals'))
 const About = lazy(() => import('./pages/About'))
 const Industries = lazy(() => import('./pages/Industries'))
 const Contact = lazy(() => import('./pages/Contact'))
@@ -224,6 +225,11 @@ function App() {
           <Route path="/services/payroll" element={
             <SuspenseWrapper>
               <PayrollManagementServices />
+            </SuspenseWrapper>
+          } />
+          <Route path="/deals" element={
+            <SuspenseWrapper>
+              <Deals />
             </SuspenseWrapper>
           } />
           

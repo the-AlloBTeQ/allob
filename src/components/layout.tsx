@@ -20,6 +20,7 @@ const Layout = ({ children }: LayoutProps) => {
     { name: 'Articles', path: '/articles' },
     { name: 'Careers', path: '/careers' },
     { name: 'Contact', path: '/contact' },
+    { name: 'Deals', path: '/deals' },
     
   ]
 

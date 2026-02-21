@@ -183,7 +183,7 @@ const ProfessionalServices = () => {
                   Get Started <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
                 <Link
-                  to="/paye-calculator"
+                  to="/taxcalculator"
                   className="border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white/10 font-semibold transition-colors"
                 >
                   PAYE Calculator
@@ -336,7 +336,7 @@ const ProfessionalServices = () => {
         </div>
       </section>
 
-      {/* Case Studies */}
+      {/* Case Studies 
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
