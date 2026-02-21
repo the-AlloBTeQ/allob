@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block internal/transactional pages from indexing
+Disallow: /checkout
+Disallow: /checkout/
+
+# Sitemap location
+Sitemap: https://www.allob.co.za/sitemap.xml
