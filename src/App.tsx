@@ -1,8 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './components/layout'
-
-// Home page should load immediately for better UX
+import { HelmetProvider } from 'react-helmet-async'
 import Home from './pages/Home'
 import Booking from './pages/booking'
 
@@ -91,6 +90,7 @@ const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
 
 function App() {
   return (
+    <HelmetProvider>
     <Router>
       <Layout>
         <Routes>
@@ -267,6 +267,7 @@ function App() {
         </Routes>
       </Layout>
     </Router>
+    </HelmetProvider>
   )
 }
 

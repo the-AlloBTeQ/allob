@@ -1,5 +1,13 @@
 import { Link } from 'react-router-dom'
 import { Shield, Award, Users, TrendingUp, Target, BookOpen, Globe, CheckCircle } from 'lucide-react'
+import SEO from '../components/SEO';
+
+<SEO
+  title="About Us"
+  description="Learn about AlloB Consultants — a dynamic consulting firm based in Midrand, Gauteng, committed to Integrity and Innovation since 2016."
+  keywords="about AlloB Consultants, accounting firm Midrand, business consulting Gauteng, AlloB Polompa"
+  canonical="/about"
+/>
 
 const About = () => {
   const values = [

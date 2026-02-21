@@ -1,5 +1,13 @@
 import { useState } from 'react'
 import { Phone, Mail, MapPin, Clock, Send, Calendar, MessageSquare } from 'lucide-react'
+import SEO from '../components/SEO';
+
+<SEO
+  title="Contact Us"
+  description="Get in touch with AlloB Consultants. Request a quote, book a consultation, or reach our team in Midrand, Gauteng. Call +27 (067) 921 1947."
+  keywords="contact AlloB Consultants, accounting quote South Africa, book consultation Midrand"
+  canonical="/contact"
+/>
 
 const Contact = () => {
   const [formData, setFormData] = useState({

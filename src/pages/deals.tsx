@@ -5,6 +5,14 @@ import {
   Mail, Phone, Award, Target, Zap, ArrowRight, CheckCircle,
   Building2, Landmark, Globe, BarChart3, FileSearch, Network
 } from 'lucide-react';
+import SEO from '../components/SEO';
+
+<SEO
+  title="Deal Origination"
+  description="AlloB Consultants identifies, packages, and prepares investment opportunities across South Africa — connecting businesses seeking funding with our financing partner network."
+  keywords="deal origination South Africa, investment opportunities, financing readiness, business funding, deal packaging Gauteng"
+  canonical="/deals"
+/>
 
 const DealsPage = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);

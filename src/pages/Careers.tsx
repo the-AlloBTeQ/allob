@@ -4,6 +4,14 @@ import {
   GraduationCap, Coffee, Laptop,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+
+<SEO
+  title="Careers"
+  description="Join the AlloB Consultants team. We are looking for talented accounting, tax, and business advisory professionals in South Africa."
+  keywords="accounting jobs South Africa, careers Midrand, tax advisory jobs Gauteng, AlloB Consultants careers"
+  canonical="/careers"
+/>
 
 const Careers = () => {
   const benefits = [

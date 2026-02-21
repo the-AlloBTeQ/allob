@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, CheckCircle, Star, Phone, Mail, User, Building, ArrowRight, Shield, Award, Users, AlertCircle } from 'lucide-react';
+import SEO from '../components/SEO';
+
+<SEO
+  title="Tax Consultation"
+  description="Book a professional tax consultation with AlloB Consultants. Expert tax advisory services for individuals and businesses across South Africa."
+  keywords="tax consultation South Africa, book tax advisor, tax planning Midrand, tax advisory services Gauteng"
+  canonical="/tax-consultation"
+/>
 
 declare var gtag: ((...args: any[]) => void) | undefined;
 

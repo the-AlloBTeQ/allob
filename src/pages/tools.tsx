@@ -1,6 +1,14 @@
 
 import { Link } from 'react-router-dom';
 import { Calculator, TrendingUp, Users, CheckCircle, Phone, Mail, Star, Zap, Shield, BarChart3, CreditCard } from 'lucide-react';
+import SEO from '../components/SEO';
+
+<SEO
+  title="Business Tools"
+  description="Access AlloB Consultants' suite of free business tools including PAYE calculator, invoice generator, payslip generator, and professional agreement templates."
+  keywords="business tools South Africa, free PAYE calculator, invoice generator, payslip generator, FynancKit"
+  canonical="/tools"
+/>
 
 const ToolsPage = () => {
   const payeFeatures = [

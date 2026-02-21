@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, User, Clock, Eye, Tag, Search, Filter, ArrowRight } from 'lucide-react';
+import SEO from '../components/SEO';
+
+<SEO
+  title="Articles & Insights"
+  description="Read the latest business, tax, and accounting insights from AlloB Consultants. Expert guidance on financial management, compliance, and growth strategies."
+  keywords="accounting articles, tax insights South Africa, business advice, financial management tips"
+  canonical="/articles"
+/>
 
 // Article metadata for the listing page
 const articlesData = [

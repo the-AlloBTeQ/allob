@@ -1,6 +1,14 @@
 // pages/CheckoutPage.tsx
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, ArrowLeft, MapPin, Building, Users, Calendar, CreditCard, Shield, AlertCircle } from 'lucide-react';
+import SEO from '../components/SEO';
+
+<SEO
+  title="Checkout"
+  description="Complete your AlloB Consultants service purchase securely."
+  canonical="/checkout"
+  noIndex={true}
+/>
 
 declare var gtag: ((...args: any[]) => void) | undefined;
 

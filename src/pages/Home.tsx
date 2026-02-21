@@ -4,6 +4,14 @@ import {
   ChevronLeft, ChevronRight, Play, Pause
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+
+<SEO
+  title="Accounting, Tax & Business Advisory"
+  description="AlloB Consultants delivers accounting, tax advisory, business advisory, and deal origination services across South Africa. Based in Midrand, Gauteng."
+  keywords="accounting services South Africa, tax advisory Midrand, business advisory Gauteng, PAYE calculator, deal origination"
+  canonical="/"
+/>
 
 const LandingPage = () => {
   // State management

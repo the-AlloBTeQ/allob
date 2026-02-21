@@ -12,6 +12,15 @@ import {
     TAX_YEAR_DATA,
     formatCurrency
 } from '../types/calculator';
+import SEO from '../components/SEO';
+
+<SEO
+  title="PAYE Tax Calculator"
+  description="Calculate your PAYE tax obligations with AlloB's free South African PAYE calculator. Supports multiple income streams for accurate tax calculations."
+  keywords="PAYE calculator South Africa, tax calculator, income tax calculator, PAYE 2025, SARS tax calculator"
+  canonical="/paye-calculator"
+/>
+
 
 // ─── Extended Types ────────────────────────────────────────────────────────────
 

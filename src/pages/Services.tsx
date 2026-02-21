@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Calculator, FileText, Briefcase, CheckCircle, ArrowRight, Phone } from 'lucide-react'
+import SEO from '../components/SEO';
+
+<SEO
+  title="Our Services"
+  description="Explore AlloB Consultants' full range of services including accounting, tax planning, company secretarial, management accounts, and strategic business advisory."
+  keywords="accounting services, tax planning, company secretarial, management accounts, business advisory South Africa"
+  canonical="/services"
+/>
 
 interface Service {
   id: string

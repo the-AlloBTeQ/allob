@@ -3,6 +3,14 @@ import {
   Monitor, Factory, ShoppingCart, Briefcase, Heart, 
   HardHat, Truck, Users, Building, Zap, ArrowRight 
 } from 'lucide-react'
+import SEO from '../components/SEO';
+
+<SEO
+  title="Industries We Serve"
+  description="AlloB Consultants serves clients across multiple industries in South Africa including retail, manufacturing, technology, healthcare, agriculture, and professional services."
+  keywords="industries served, accounting for retail, manufacturing advisory, healthcare consulting South Africa"
+  canonical="/industries"
+/>
 
 interface Industry {
   id: string
