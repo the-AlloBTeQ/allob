@@ -747,7 +747,7 @@ const DealsPage = () => {
                 <a href="tel:+27123456789"
                   className="inline-flex items-center gap-3 px-8 py-4 border-2 border-white/40 text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300">
                   <Phone className="w-5 h-5" />
-                  +27 12 345 6789
+                  +27 67 921 1947
                 </a>
               </div>
               <div className="flex items-center justify-center gap-2 text-blue-400 text-sm">
