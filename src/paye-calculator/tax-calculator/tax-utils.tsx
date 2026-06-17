@@ -239,6 +239,9 @@ export const calculateTaxLiability = (
     // Total deductions
     const deductions: TaxDeductions = {
         pensionContributions: pensionDeduction,
+        pensionFund: 0,
+        medicalAid: 0,
+        other: 0,
         workFromHomeDeduction,
         travelAllowance,
         businessExpenses,

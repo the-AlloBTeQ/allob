@@ -14,14 +14,6 @@ import {
 } from '../types/calculator';
 import SEO from '../components/SEO';
 
-<SEO
-  title="PAYE Tax Calculator"
-  description="Calculate your PAYE tax obligations with AlloB's free South African PAYE calculator. Supports multiple income streams for accurate tax calculations."
-  keywords="PAYE calculator South Africa, tax calculator, income tax calculator, PAYE 2025, SARS tax calculator"
-  canonical="/paye-calculator"
-/>
-
-
 // ─── Extended Types ────────────────────────────────────────────────────────────
 
 interface MedicalAidInfo {
@@ -173,6 +165,10 @@ const calculateTaxLiability = (
     const monthlyPAYE = taxLiability / 12;
     const UIF = Math.min(grossIncome * 0.01, 177.12 * 12);
     const totalDeductions = pensionDeductions + annualIncomeProtection + travelDeduction + workFromHomeDeduction + donationsDeduction;
+    const annualMedicalContribution = medicalAid.monthlyContribution * 12;
+    // Only genuine cash outflows: travel/home-office are tax deductions only, not money leaving the bank
+    const annualTakeHome = grossIncome - pensionDeductions - annualIncomeProtection - donationsDeduction - annualMedicalContribution - taxLiability - UIF;
+    const monthlyTakeHome = annualTakeHome / 12;
 
     // Warnings
     const warnings: string[] = [];
@@ -210,6 +206,9 @@ const calculateTaxLiability = (
         _incomeProtection: annualIncomeProtection,
         _donations: donationsDeduction,
         _travelDeduction: travelDeduction,
+        _medicalContribution: annualMedicalContribution,
+        _annualTakeHome: annualTakeHome,
+        _monthlyTakeHome: monthlyTakeHome,
     };
 };
 
@@ -418,11 +417,12 @@ tr:last-child td{background:#eff6ff;font-weight:600}
     ${results._medicalCredit > 0 ? `<div class="row" style="color:#059669;font-size:14px"><span>+ Medical Aid Tax Credit</span><span>+${formatCurrency(results._medicalCredit)}</span></div>` : ''}
     ${results._additionalMedicalDeduction > 0 ? `<div class="row" style="color:#059669;font-size:14px"><span>+ Additional Medical (65+/Disability)</span><span>+${formatCurrency(results._additionalMedicalDeduction)}</span></div>` : ''}
     <div class="total-row" style="background:#fee2e2;color:#dc2626;margin:8px 0"><span>Net Tax Liability</span><span>${formatCurrency(results.taxLiability)}</span></div>
+    ${results._medicalContribution > 0 ? `<div class="row" style="color:#dc2626"><span>Less: Medical Aid Contribution</span><span>(${formatCurrency(results._medicalContribution)})</span></div>` : ''}
     <div class="row" style="color:#dc2626"><span>Less: UIF</span><span>(${formatCurrency(results.UIF)})</span></div>
-    <div class="total-row" style="background:linear-gradient(135deg,#059669,#047857);color:white;margin-top:14px"><span>Annual Take Home</span><span>${formatCurrency(results.grossIncome - results.deductions.total - results.taxLiability - results.UIF)}</span></div>
+    <div class="total-row" style="background:linear-gradient(135deg,#059669,#047857);color:white;margin-top:14px"><span>Annual Take Home</span><span>${formatCurrency(results._annualTakeHome)}</span></div>
   </div>
   <div class="grid4" style="margin-top:20px">
-    <div style="background:#f9fafb;padding:14px;border-radius:8px;text-align:center"><div style="font-size:11px;color:#6b7280;margin-bottom:5px">Monthly Take-Home</div><div style="font-size:20px;font-weight:bold;color:#1e40af">${formatCurrency((results.grossIncome - results.deductions.total - results.taxLiability - results.UIF)/12)}</div></div>
+    <div style="background:#f9fafb;padding:14px;border-radius:8px;text-align:center"><div style="font-size:11px;color:#6b7280;margin-bottom:5px">Monthly Take-Home</div><div style="font-size:20px;font-weight:bold;color:#1e40af">${formatCurrency(results._monthlyTakeHome)}</div></div>
     <div style="background:#f9fafb;padding:14px;border-radius:8px;text-align:center"><div style="font-size:11px;color:#6b7280;margin-bottom:5px">Effective Tax Rate</div><div style="font-size:20px;font-weight:bold;color:#1e40af">${effectiveTaxRate}%</div></div>
     <div style="background:#f9fafb;padding:14px;border-radius:8px;text-align:center"><div style="font-size:11px;color:#6b7280;margin-bottom:5px">Medical Credit</div><div style="font-size:20px;font-weight:bold;color:#059669">${formatCurrency(results._medicalCredit || 0)}</div></div>
     <div style="background:#f9fafb;padding:14px;border-radius:8px;text-align:center"><div style="font-size:11px;color:#6b7280;margin-bottom:5px">Primary Rebate</div><div style="font-size:20px;font-weight:bold;color:#1e40af">${formatCurrency(results.primaryRebate)}</div></div>
@@ -612,6 +612,12 @@ const TaxCalculator = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+            <SEO
+                title="PAYE Tax Calculator"
+                description="Calculate your PAYE tax obligations with AlloB's free South African PAYE calculator. Supports multiple income streams for accurate tax calculations."
+                keywords="PAYE calculator South Africa, tax calculator, income tax calculator, PAYE 2025, SARS tax calculator"
+                canonical="/paye-calculator"
+            />
             {/* Header bar */}
             <div className="bg-white shadow-sm border-b sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -683,8 +689,12 @@ const TaxCalculator = () => {
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Year of Assessment</label>
                                     <select value={selectedYear} onChange={e => setYear(Number(e.target.value))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
-                                        <option value="2022">2022</option><option value="2023">2023</option>
-                                        <option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
                                     </select>
                                 </div>
                                 <div>
@@ -923,10 +933,11 @@ const TaxCalculator = () => {
                                             </div>
                                             <div className="flex justify-between py-3 border-b text-red-700"><span className="font-semibold">Net Tax Liability (PAYE)</span><span className="font-bold text-lg">({formatCurrency(results.taxLiability)})</span></div>
                                             <div className="flex justify-between py-3 border-b bg-green-50 px-3 rounded mt-2"><span className="font-semibold text-gray-900">Net Earnings (After Tax)</span><span className="font-bold text-xl text-green-700">{formatCurrency(results.grossIncome - results.taxLiability)}</span></div>
+                                            {results._medicalContribution > 0 && <div className="flex justify-between py-3 border-b text-red-700"><span className="font-semibold">Less: Medical Aid Contribution</span><span className="font-bold text-lg">({formatCurrency(results._medicalContribution)})</span></div>}
                                             <div className="flex justify-between py-3 border-b text-red-700"><span className="font-semibold">Less: UIF</span><span className="font-bold text-lg">({formatCurrency(results.UIF)})</span></div>
                                             <div className="flex justify-between py-4 bg-gradient-to-r from-green-600 to-green-700 text-white px-4 rounded-lg mt-3">
                                                 <span className="font-bold text-lg">Annual Take Home</span>
-                                                <span className="font-bold text-2xl">{formatCurrency(results.grossIncome - results.deductions.total - results.taxLiability - results.UIF)}</span>
+                                                <span className="font-bold text-2xl">{formatCurrency(results._annualTakeHome)}</span>
                                             </div>
                                         </div>
 
@@ -936,11 +947,12 @@ const TaxCalculator = () => {
                                             <div className="space-y-3">
                                                 <div className="flex justify-between py-2"><span className="text-gray-700">Monthly Gross Income</span><span className="font-semibold">{formatCurrency(results.grossIncome / 12)}</span></div>
                                                 <div className="flex justify-between py-2 text-red-700"><span>Monthly Retirement Deductions</span><span>({formatCurrency(results.deductions.pensionContributions / 12)})</span></div>
+                                                {results._medicalContribution > 0 && <div className="flex justify-between py-2 text-red-700"><span>Monthly Medical Aid Contribution</span><span>({formatCurrency(results._medicalContribution / 12)})</span></div>}
                                                 <div className="flex justify-between py-2 text-red-700"><span>Monthly PAYE</span><span>({formatCurrency(results.monthlyPAYE)})</span></div>
                                                 <div className="flex justify-between py-2 text-red-700"><span>Monthly UIF</span><span>({formatCurrency(results.UIF / 12)})</span></div>
                                                 <div className="flex justify-between py-3 bg-gradient-to-r from-green-600 to-green-700 text-white px-4 rounded-lg mt-2">
                                                     <span className="font-bold">Monthly Take Home</span>
-                                                    <span className="font-bold text-xl">{formatCurrency((results.grossIncome - results.deductions.total - results.taxLiability - results.UIF) / 12)}</span>
+                                                    <span className="font-bold text-xl">{formatCurrency(results._monthlyTakeHome)}</span>
                                                 </div>
                                             </div>
                                         </div>

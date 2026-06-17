@@ -186,6 +186,30 @@ export const TAX_YEAR_DATA = {
             PERCENTAGE: 0.275,
             AMOUNT: 350000
         }
+    },
+    2027: {
+        BRACKETS: [
+            { threshold: 245100, rate: 0.18, base: 0 },
+            { threshold: 383100, rate: 0.26, base: 44118 },
+            { threshold: 530200, rate: 0.31, base: 79998 },
+            { threshold: 695800, rate: 0.36, base: 125599 },
+            { threshold: 887000, rate: 0.39, base: 185215 },
+            { threshold: 1878600, rate: 0.41, base: 259783 },
+            { threshold: Infinity, rate: 0.45, base: 666339 }
+        ] as TaxBracket[],
+        REBATES: {
+            PRIMARY: 17235,
+            SECONDARY: 9444,
+            TERTIARY: 3145
+        },
+        AGE_THRESHOLDS: {
+            SECONDARY: 65,
+            TERTIARY: 75
+        },
+        PENSION_LIMITS: {
+            PERCENTAGE: 0.275,
+            AMOUNT: 350000
+        }
     }
 } as const;
 
