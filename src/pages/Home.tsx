@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { 
-  Calculator, FileText, Award, Users, Target, ArrowRight, 
+  Calculator, FileText, Award, Users, ArrowRight, 
   ChevronLeft, ChevronRight, Play, Pause
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -16,7 +16,9 @@ const LandingPage = () => {
 
   // Stats data
   const stats = [
-    { label: 'Years of Experience', value: '10+', icon: Award }
+    { label: 'Years of Experience', value: '8+', icon: Award },
+    { label: 'Clients Served', value: '100+', icon: Users },
+    { label: 'Tax Returns Filed', value: '100+', icon: FileText }
   ];
 
   // Main services data
@@ -272,8 +274,8 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Stats Section 
-      <section className="py-16 bg-blue-50 border-4 border-blue-200">
+      {/* Stats Section */}
+      <section className="py-16 bg-blue-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-8">
             {stats.map((stat, index) => (
