@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, User, Clock, Eye, Tag, Search, Filter, ArrowRight } from 'lucide-react';
 import SEO from '../components/SEO';
-
-<SEO
-  title="Articles & Insights"
-  description="Read the latest business, tax, and accounting insights from AlloB Consultants. Expert guidance on financial management, compliance, and growth strategies."
-  keywords="accounting articles, tax insights South Africa, business advice, financial management tips"
-  canonical="/articles"
-/>
+import { fetchViewCounts } from '../utils/article-views';
 
 // Article metadata for the listing page
 const articlesData = [
@@ -20,7 +14,6 @@ const articlesData = [
     readTime: '8 min read',
     category: 'tax',
     tags: ['Tax Law', 'SARS', 'Compliance', '2025 Updates'],
-    views: 1250,
     excerpt: 'Stay compliant with the latest tax amendments for 2025. Learn about new requirements, deadlines, and how they affect your business operations in South Africa.',
     image: 'https://placehold.co/400x300/dc2626/ffffff?text=Tax+Amendments',
     featured: true
@@ -33,7 +26,6 @@ const articlesData = [
     readTime: '12 min read',
     category: 'accounting',
     tags: ['IFRS 17', 'Insurance', 'Financial Reporting'],
-    views: 890,
     excerpt: 'Navigate IFRS 17 implementation with confidence. Essential guidance for insurance companies on compliance and reporting requirements.',
     image: 'https://placehold.co/400x300/1e40af/ffffff?text=IFRS+17',
     featured: false
@@ -46,7 +38,6 @@ const articlesData = [
     readTime: '10 min read',
     category: 'business',
     tags: ['Digital Transformation', 'SME', 'Technology', 'Strategy'],
-    views: 650,
     excerpt: 'Transform your SME with strategic digital initiatives. Learn proven approaches to successful technology adoption and digital growth.',
     image: 'https://placehold.co/400x300/7c3aed/ffffff?text=Digital+Transform',
     featured: true
@@ -59,7 +50,6 @@ const articlesData = [
     readTime: '6 min read',
     category: 'industry',
     tags: ['Manufacturing', 'Economic Recovery', 'Industry Analysis'],
-    views: 520,
     excerpt: 'Understand manufacturing sector recovery patterns and position your business for growth in the new economic landscape.',
     image: 'https://placehold.co/400x300/059669/ffffff?text=Manufacturing',
     featured: false
@@ -72,7 +62,6 @@ const articlesData = [
     readTime: '7 min read',
     category: 'tax',
     tags: ['VAT', 'E-commerce', 'Compliance'],
-    views: 780,
     excerpt: 'Ensure VAT compliance for your e-commerce business with our comprehensive guide to South African tax requirements.',
     image: 'https://placehold.co/400x300/ea580c/ffffff?text=VAT+Compliance',
     featured: false
@@ -85,7 +74,6 @@ const articlesData = [
     readTime: '9 min read',
     category: 'business',
     tags: ['Sustainability', 'SME', 'Growth Strategies'],
-    views: 430,
     excerpt: 'Build a sustainable future for your SME with proven growth strategies that balance profitability with responsibility.',
     image: 'https://placehold.co/400x300/0891b2/ffffff?text=Sustainable+Growth',
     featured: false
@@ -98,7 +86,6 @@ const articlesData = [
     readTime: '10 min read',
     category: 'business',
     tags: ['UIF', 'SME', 'Compliance'],
-    views: 680,
     excerpt: 'Fulfill your UIF compliance obligations and protect your employees with our comprehensive guide for SME employers.',
     image: 'https://placehold.co/400x300/8b5cf6/ffffff?text=UIF+Compliance',
     featured: true
@@ -109,6 +96,11 @@ const Articles: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('date');
+  const [viewCounts, setViewCounts] = useState<Record<string, number>>({});
+
+  React.useEffect(() => {
+    fetchViewCounts(articlesData.map((article) => article.id)).then(setViewCounts);
+  }, []);
 
   const categories = [
     { value: 'all', label: 'All Categories' },
@@ -131,7 +123,7 @@ const Articles: React.FC = () => {
       if (sortBy === 'date') {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
       } else if (sortBy === 'views') {
-        return b.views - a.views;
+        return (viewCounts[String(b.id)] || 0) - (viewCounts[String(a.id)] || 0);
       } else if (sortBy === 'title') {
         return a.title.localeCompare(b.title);
       }
@@ -160,6 +152,12 @@ const Articles: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Articles & Insights"
+        description="Read the latest business, tax, and accounting insights from AlloB Consultants. Expert guidance on financial management, compliance, and growth strategies."
+        keywords="accounting articles, tax insights South Africa, business advice, financial management tips"
+        canonical="/articles"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -196,10 +194,12 @@ const Articles: React.FC = () => {
                       <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(article.category)}`}>
                         {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
                       </span>
-                      <span className="text-sm text-gray-500 flex items-center">
-                        <Eye className="w-4 h-4 mr-1" />
-                        {article.views.toLocaleString()}
-                      </span>
+                      {viewCounts[String(article.id)] !== undefined && (
+                        <span className="text-sm text-gray-500 flex items-center">
+                          <Eye className="w-4 h-4 mr-1" />
+                          {viewCounts[String(article.id)].toLocaleString()}
+                        </span>
+                      )}
                     </div>
                     
                     <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
@@ -331,10 +331,12 @@ const Articles: React.FC = () => {
                       <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(article.category)}`}>
                         {article.category.charAt(0).toUpperCase() + article.category.slice(1)}
                       </span>
-                      <span className="text-sm text-gray-500 flex items-center">
-                        <Eye className="w-4 h-4 mr-1" />
-                        {article.views.toLocaleString()}
-                      </span>
+                      {viewCounts[String(article.id)] !== undefined && (
+                        <span className="text-sm text-gray-500 flex items-center">
+                          <Eye className="w-4 h-4 mr-1" />
+                          {viewCounts[String(article.id)].toLocaleString()}
+                        </span>
+                      )}
                     </div>
                     
                     <h3 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">

@@ -1,5 +1,6 @@
-import React, { useState, useEffect, Suspense, Component } from 'react';
+import React, { useState, useEffect, useRef, Suspense, Component } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { fetchViewCounts, incrementViewCount } from '../utils/article-views';
 import { 
   ArrowLeft, Calendar, User, Clock, Share2, Eye, Tag, 
   Loader2, AlertCircle, Printer, ChevronDown, FileText,
@@ -15,7 +16,6 @@ interface ArticleMeta {
   readTime: string;
   category: string;
   tags: string[];
-  views: number;
   description: string;
   keywords: string;
   excerpt: string;
@@ -43,7 +43,6 @@ const articleMetadata: Record<number, ArticleMeta> = {
     readTime: '8 min read',
     category: 'tax',
     tags: ['Tax Law', 'SARS', 'Compliance', '2025 Updates'],
-    views: 1250,
     description: 'Comprehensive guide to the latest tax law changes in South Africa for 2025, including compliance requirements and business implications.',
     keywords: 'South Africa tax amendments 2025, SARS compliance, tax law changes, business tax updates',
     excerpt: 'Stay compliant with the latest tax amendments for 2025. Learn about new requirements, deadlines, and how they affect your business operations.',
@@ -57,7 +56,6 @@ const articleMetadata: Record<number, ArticleMeta> = {
     readTime: '12 min read',
     category: 'accounting',
     tags: ['IFRS 17', 'Insurance', 'Financial Reporting'],
-    views: 890,
     description: 'Complete guide to IFRS 17 implementation for insurance companies, covering requirements, timelines, and best practices.',
     keywords: 'IFRS 17, insurance accounting, financial reporting standards, compliance',
     excerpt: 'Navigate IFRS 17 implementation with confidence. Essential guidance for insurance companies on compliance and reporting requirements.',
@@ -71,7 +69,6 @@ const articleMetadata: Record<number, ArticleMeta> = {
     readTime: '10 min read',
     category: 'business',
     tags: ['Digital Transformation', 'SME', 'Technology', 'Strategy'],
-    views: 650,
     description: 'Strategic roadmap for small and medium enterprises embarking on digital transformation initiatives.',
     keywords: 'SME digital transformation, business technology strategy, small business digitalization',
     excerpt: 'Transform your SME with strategic digital initiatives. Learn proven approaches to successful technology adoption.',
@@ -85,7 +82,6 @@ const articleMetadata: Record<number, ArticleMeta> = {
     readTime: '6 min read',
     category: 'industry',
     tags: ['Manufacturing', 'Economic Recovery', 'Industry Analysis'],
-    views: 520,
     description: 'Analysis of manufacturing sector recovery trends following the global pandemic, with insights for business planning.',
     keywords: 'manufacturing recovery, post-pandemic business trends, industrial sector analysis',
     excerpt: 'Understand manufacturing sector recovery patterns and position your business for growth in the new economic landscape.',
@@ -99,7 +95,6 @@ const articleMetadata: Record<number, ArticleMeta> = {
     readTime: '7 min read',
     category: 'tax',
     tags: ['VAT', 'E-commerce', 'Compliance'],
-    views: 780,
     description: 'Essential VAT compliance guide for e-commerce businesses operating in South Africa.',
     keywords: 'e-commerce VAT South Africa, online business tax compliance, digital commerce taxation',
     excerpt: 'Ensure VAT compliance for your e-commerce business with our comprehensive guide to South African tax requirements.',
@@ -113,7 +108,6 @@ const articleMetadata: Record<number, ArticleMeta> = {
     readTime: '9 min read',
     category: 'business',
     tags: ['Sustainability', 'SME', 'Growth Strategies'],
-    views: 430,
     description: 'Practical sustainable growth strategies that small and medium enterprises can implement for long-term success.',
     keywords: 'sustainable business growth, SME sustainability strategies, responsible business practices',
     excerpt: 'Build a sustainable future for your SME with proven growth strategies that balance profitability with responsibility.',
@@ -127,7 +121,6 @@ const articleMetadata: Record<number, ArticleMeta> = {
     readTime: '10 min read',
     category: 'business',
     tags: ['UIF', 'SME', 'Compliance'],
-    views: 680,
     description: 'Understanding UIF compliance requirements for small and medium enterprises and employee protection obligations.',
     keywords: 'UIF compliance South Africa, SME employee protection, unemployment insurance fund',
     excerpt: 'Fulfill your UIF compliance obligations and protect your employees with our comprehensive guide for SME employers.',
@@ -535,7 +528,7 @@ const useArticleSaveAndPrint = (article: ArticleMeta): UseArticleSaveAndPrintRet
       year: 'numeric',
       month: 'long',
       day: 'numeric'
-    })} • ${article.readTime} • ${article.views.toLocaleString()} views
+    })} • ${article.readTime}
   </div>
   
   <div class="tags no-break">
@@ -743,7 +736,6 @@ Published: ${new Date(article.date).toLocaleDateString('en-ZA', {
       })}
 Category: ${article.category.charAt(0).toUpperCase() + article.category.slice(1)}
 Reading Time: ${article.readTime}
-Views: ${article.views.toLocaleString()}
 
 Tags: ${article.tags.join(', ')}
 
@@ -792,7 +784,7 @@ Email: info@allob.co.za
 };
 
 // Related Articles Component
-const RelatedArticles: React.FC<{ currentId: number; category: string }> = ({ currentId, category }) => {
+const RelatedArticles: React.FC<{ currentId: number; category: string; viewCounts: Record<string, number> }> = ({ currentId, category, viewCounts }) => {
   const relatedArticles = Object.values(articleMetadata)
     .filter(article => 
       article.id !== currentId && 
@@ -832,10 +824,12 @@ const RelatedArticles: React.FC<{ currentId: number; category: string }> = ({ cu
               <p className="text-gray-600 text-sm mb-3">{article.excerpt}</p>
              <div className="flex items-center justify-between text-xs text-gray-500">
                 <span>{article.readTime}</span>
-                <span className="flex items-center">
-                  <Eye className="w-3 h-3 mr-1" />
-                  {article.views}
-                </span>
+                {viewCounts[String(article.id)] !== undefined && (
+                  <span className="flex items-center">
+                    <Eye className="w-3 h-3 mr-1" />
+                    {viewCounts[String(article.id)]}
+                  </span>
+                )}
               </div>
             </Link>
           ))}
@@ -896,6 +890,8 @@ const ArticleDetail = () => {
   const [retryKey, setRetryKey] = useState(0);
   const [liked, setLiked] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
+  const [viewCounts, setViewCounts] = useState<Record<string, number>>({});
+  const incrementedForRef = useRef<number | null>(null);
 
   const {
     isLoading,
@@ -908,10 +904,25 @@ const ArticleDetail = () => {
   } = useArticleSaveAndPrint(article);
 
   useEffect(() => {
-    if (article) {
-      console.log(`Viewed: ${article.title}`);
+    // Merge rather than replace: the increment POST below can land first, and
+    // its fresher number must not be clobbered by this read-only snapshot.
+    fetchViewCounts(Object.keys(articleMetadata)).then((counts) => {
+      setViewCounts((prev) => ({ ...counts, ...prev }));
+    });
+  }, []);
+
+  useEffect(() => {
+    // Keyed by article id so navigating between articles (e.g. via Related
+    // Articles, which reuses this component) still counts the new one once.
+    if (article && incrementedForRef.current !== articleId) {
+      incrementedForRef.current = articleId;
+      incrementViewCount(articleId).then((views) => {
+        if (views !== null) {
+          setViewCounts((prev) => ({ ...prev, [String(articleId)]: views }));
+        }
+      });
     }
-  }, [article]);
+  }, [article, articleId]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -1027,7 +1038,9 @@ const ArticleDetail = () => {
             <div className="flex items-center"><User className="w-4 h-4 mr-1" /> {article.author}</div>
             <div className="flex items-center"><Calendar className="w-4 h-4 mr-1" /> <time>{formattedDate}</time></div>
             <div className="flex items-center"><Clock className="w-4 h-4 mr-1" /> {article.readTime}</div>
-            <div className="flex items-center"><Eye className="w-4 h-4 mr-1" /> {article.views.toLocaleString()} views</div>
+            {viewCounts[String(articleId)] !== undefined && (
+              <div className="flex items-center"><Eye className="w-4 h-4 mr-1" /> {viewCounts[String(articleId)].toLocaleString()} views</div>
+            )}
           </div>
 
           <p className="text-lg text-gray-700 mb-6">{article.excerpt}</p>
@@ -1147,7 +1160,7 @@ const ArticleDetail = () => {
         </article>
       </main>
 
-      <RelatedArticles currentId={articleId} category={article.category} />
+      <RelatedArticles currentId={articleId} category={article.category} viewCounts={viewCounts} />
 
       <aside className="bg-white border-t border-gray-200 no-print py-12">
         <div className="max-w-4xl mx-auto px-4">
