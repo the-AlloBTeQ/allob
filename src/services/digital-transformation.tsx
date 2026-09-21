@@ -34,11 +34,11 @@ const DigitalTransformationServices = () => {
 
   const solutions = [
     {
-      name: "FynancKit",
-      description: "Comprehensive financial management platform",
+      name: "Sormalitics",
+      description: "The ERP we're building to help companies manage their accounting and record-keeping",
       features: ["Document management", "Invoice generation", "Financial reporting", "Compliance tracking"],
-      status: "Early Access",
-      color: "purple"
+      status: "In Development – 2026",
+      color: "amber"
     },
     {
       name: "PAYE Calculator",
@@ -46,13 +46,6 @@ const DigitalTransformationServices = () => {
       features: ["Multi-income streams", "Real-time calculations", "Compliance updates", "Export capabilities"],
       status: "Live",
       color: "green"
-    },
-    {
-      name: "ERP Suite",
-      description: "Complete business management solution",
-      features: ["Integrated modules", "Real-time analytics", "Mobile access", "Custom workflows"],
-      status: "Coming Soon",
-      color: "blue"
     }
   ];
 
@@ -116,12 +109,12 @@ const DigitalTransformationServices = () => {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
                 <a 
-                  href="https://www.fynanckit.com" 
+                  href="https://sormalitics.com/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-cyan-600 font-semibold transition-colors"
                 >
-                  Try FynancKit
+                  Explore Sormalitics
                 </a>
               </div>
             </div>
@@ -206,14 +199,14 @@ const DigitalTransformationServices = () => {
             <p className="text-xl text-gray-600">Innovative tools built for modern businesses</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {solutions.map((solution, index) => (
               <div key={index} className="bg-gray-50 rounded-xl p-8 hover:bg-gray-100 transition-colors">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-2xl font-semibold text-gray-900">{solution.name}</h3>
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                     solution.color === 'green' ? 'bg-green-100 text-green-800' :
-                    solution.color === 'purple' ? 'bg-purple-100 text-purple-800' :
+                    solution.color === 'amber' ? 'bg-amber-100 text-amber-800' :
                     'bg-blue-100 text-blue-800'
                   }`}>
                     {solution.status}
@@ -225,7 +218,7 @@ const DigitalTransformationServices = () => {
                     <li key={idx} className="flex items-center text-gray-700 text-sm">
                       <div className={`w-2 h-2 rounded-full mr-3 ${
                         solution.color === 'green' ? 'bg-green-500' :
-                        solution.color === 'purple' ? 'bg-purple-500' :
+                        solution.color === 'amber' ? 'bg-amber-500' :
                         'bg-blue-500'
                       }`}></div>
                       {feature}
@@ -339,12 +332,12 @@ const DigitalTransformationServices = () => {
               Schedule Assessment
             </Link>
             <a 
-              href="https://www.fynanckit.com" 
+              href="https://sormalitics.com/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-gray-900 font-semibold transition-colors"
             >
-              Explore FynancKit
+              Explore Sormalitics
             </a>
           </div>
         </div>

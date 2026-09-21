@@ -1,4 +1,5 @@
 // types/calculator-types.ts
+import { getCurrentTaxYear } from '../utils/utils';
 // Core types and interfaces for the PAYE Tax Calculator
 
 export type FrequencyType = 'once-off' | 'monthly' | 'weekly' | 'annual';
@@ -249,4 +250,16 @@ export interface TaxCalculatorUsage {
     hasMultipleEmployers: boolean;
     hasDeductions: boolean;
     calculationSuccessful: boolean;
+}
+// Picks the tax year to default the calculator to: the current SA year of
+// assessment, unless we don't yet have bracket data for it (e.g. it's a new
+// tax year and SARS's brackets haven't been added to TAX_YEAR_DATA yet), in
+// which case we fall back to the most recent year we do have data for.
+export function getDefaultTaxYear(): TaxYear {
+    const available = Object.keys(TAX_YEAR_DATA).map(Number);
+    const current = getCurrentTaxYear();
+    if (available.includes(current)) {
+        return current as TaxYear;
+    }
+    return Math.max(...available) as TaxYear;
 }

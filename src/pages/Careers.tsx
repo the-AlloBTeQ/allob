@@ -6,13 +6,6 @@ import {
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
-<SEO
-  title="Careers"
-  description="Join the AlloB Consultants team. We are looking for talented accounting, tax, and business advisory professionals in South Africa."
-  keywords="accounting jobs South Africa, careers Midrand, tax advisory jobs Gauteng, AlloB Consultants careers"
-  canonical="/careers"
-/>
-
 const Careers = () => {
   const benefits = [
     {
@@ -171,6 +164,12 @@ const Careers = () => {
 
   return (
     <div>
+      <SEO
+        title="Careers"
+        description="Join the AlloB Consultants team. We are looking for talented accounting, tax, and business advisory professionals in South Africa."
+        keywords="accounting jobs South Africa, careers Midrand, tax advisory jobs Gauteng, AlloB Consultants careers"
+        canonical="/careers"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -3,16 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { CheckCircle, ArrowLeft, MapPin, Building, Users, Calendar, CreditCard, Shield, AlertCircle } from 'lucide-react';
 import SEO from '../components/SEO';
 
-<SEO
-  title="Checkout"
-  description="Complete your AlloB Consultants service purchase securely."
-  canonical="/checkout"
-  noIndex={true}
-/>
-
 declare var gtag: ((...args: any[]) => void) | undefined;
 
-type PackageKey = 'starter' | 'professional' | 'enterprise';
+type PackageKey = 'starter' | 'professional' | 'enterprise' | 'audit';
 
 interface HandleInputChangeEvent extends React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> {}
 
@@ -131,10 +124,11 @@ const CheckoutPage = () => {
     description: string;
     features: string[];
     popular?: boolean;
+    negotiated?: boolean;
   }> = {
     starter: {
       name: 'Starter Package',
-      price: 'R3,500/month',
+      price: 'R4,200/month',
       description: 'Perfect for small businesses and startups',
       features: [
         'Monthly Bookkeeping',
@@ -145,7 +139,7 @@ const CheckoutPage = () => {
     },
     professional: {
       name: 'Professional Package',
-      price: 'R7,500/month',
+      price: 'R9,500/month',
       description: 'Comprehensive services for growing businesses',
       features: [
         'Full Accounting Services',
@@ -167,6 +161,19 @@ const CheckoutPage = () => {
         'Dedicated Account Manager',
         '24/7 Support'
       ]
+    },
+    audit: {
+      name: 'Audit Consultants',
+      price: 'Negotiated per engagement',
+      description: 'Audit readiness, internal control reviews, and compliance support alongside your appointed registered auditor. Scoped and priced per engagement.',
+      features: [
+        'Audit Readiness & Preparation',
+        'Internal Control Reviews',
+        'GRAP/IFRS Compliance Support',
+        'External Quality Assurance (EQA) Reviews',
+        'External Auditor Liaison'
+      ],
+      negotiated: true
     }
   };
 
@@ -220,8 +227,16 @@ const CheckoutPage = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const packageParam = urlParams.get('package');
-    if (packageParam && ['starter', 'professional', 'enterprise'].includes(packageParam)) {
+    if (packageParam && ['starter', 'professional', 'enterprise', 'audit'].includes(packageParam)) {
       setSelectedPackage(packageParam as PackageKey);
+      if (packageParam === 'audit') {
+        setFormData((prev: FormData) => ({
+          ...prev,
+          servicesNeeded: prev.servicesNeeded.includes('Auditing')
+            ? prev.servicesNeeded
+            : [...prev.servicesNeeded, 'Auditing']
+        }));
+      }
     }
   }, []);
 
@@ -321,12 +336,16 @@ const CheckoutPage = () => {
   const createEmailFallback = (submissionData: any): string => {
     const { package: pkg, customerData } = submissionData;
     
-    const subject = encodeURIComponent(`Service Package Request: ${pkg.name} - ${customerData.businessName}`);
-    const body = encodeURIComponent(`NEW SERVICE PACKAGE REQUEST
+    const subject = encodeURIComponent(
+      pkg.negotiated
+        ? `Audit Consulting Quote Request - ${customerData.businessName}`
+        : `Service Package Request: ${pkg.name} - ${customerData.businessName}`
+    );
+    const body = encodeURIComponent(`${pkg.negotiated ? 'NEW AUDIT CONSULTING QUOTE REQUEST' : 'NEW SERVICE PACKAGE REQUEST'}
 =========================
 
-Package Details:
-- Package: ${pkg.name}
+${pkg.negotiated ? 'Service' : 'Package'} Details:
+- ${pkg.negotiated ? 'Service' : 'Package'}: ${pkg.name}
 - Price: ${pkg.price}
 - Description: ${pkg.description}
 
@@ -503,6 +522,12 @@ Email: ${customerData.email}`);
   if (isSubmitted && submissionResult) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
+        <SEO
+          title="Checkout"
+          description="Complete your AlloB Consultants service purchase securely."
+          canonical="/checkout"
+          noIndex={true}
+        />
         <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-8 h-8 text-green-600" />
@@ -592,8 +617,14 @@ Email: ${customerData.email}`);
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Services
           </button>
-          <h1 className="text-3xl font-bold text-gray-900">Service Package Checkout</h1>
-          <p className="text-gray-600 mt-2">Complete your information to get started with our professional services</p>
+          <h1 className="text-3xl font-bold text-gray-900">
+            {packages[selectedPackage].negotiated ? 'Request an Audit Consulting Quote' : 'Service Package Checkout'}
+          </h1>
+          <p className="text-gray-600 mt-2">
+            {packages[selectedPackage].negotiated
+              ? "Tell us about your entity and audit needs — we'll scope a tailored quote based on your requirements."
+              : 'Complete your information to get started with our professional services'}
+          </p>
         </div>
 
         {/* API Error Display */}
@@ -616,7 +647,7 @@ Email: ${customerData.email}`);
           {/* Package Summary */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-lg p-6 sticky top-8">
-              <h3 className="text-xl font-bold mb-4">Package Summary</h3>
+              <h3 className="text-xl font-bold mb-4">{packages[selectedPackage].negotiated ? 'Your Request' : 'Package Summary'}</h3>
               
               {/* Package Selector */}
               <div className="mb-6">

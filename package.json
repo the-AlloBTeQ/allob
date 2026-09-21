@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "pnpm@11.25.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -17,6 +18,7 @@
     "@types/lodash": "^4.17.20",
     "@types/mongoose": "^5.11.96",
     "@types/nodemailer": "^6.4.14",
+    "@upstash/redis": "^1.38.4",
     "axios": "^1.6.2",
     "caniuse-lite": "^1.0.30001797",
     "clsx": "^2.1.1",
@@ -45,6 +47,7 @@
     "@types/recharts": "^1.8.29",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
+    "@vercel/node": "^13.0.1",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
     "baseline-browser-mapping": "^2.10.34",

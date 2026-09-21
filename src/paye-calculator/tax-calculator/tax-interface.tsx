@@ -54,7 +54,7 @@ export interface TaxBracket {
 }
 
 // Tax year enum
-export type TaxYear = 2022 | 2023 | 2024 | 2025 | 2026;
+export type TaxYear = 2022 | 2023 | 2024 | 2025 | 2026 | 2027;
 
 // Constants for tax calculations - multiple years
 export const TAX_YEAR_DATA = {

@@ -295,3 +295,13 @@ export function parseCSV(csvString: string, delimiter: string = ','): Record<str
     return obj;
   }).filter(Boolean) as Record<string, string>[];
 }
+// South Africa's tax "year of assessment" runs 1 March to the end of February,
+// and is named after the calendar year it ends in
+// (e.g. 1 Mar 2025 - 28 Feb 2026 is the "2026" year of assessment).
+// Use this instead of a hardcoded year anywhere the UI references "this tax year" -
+// it rolls over automatically on 1 March each year.
+export function getCurrentTaxYear(date: Date = new Date()): number {
+  const calendarYear = date.getFullYear();
+  const month = date.getMonth(); // 0 = January, 2 = March
+  return month >= 2 ? calendarYear + 1 : calendarYear;
+}

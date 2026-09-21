@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { 
-  Calculator, FileText, Briefcase, ArrowRight, 
+  Calculator, FileText, Briefcase, ClipboardCheck, ArrowRight, 
   ChevronLeft, ChevronRight, Play, Pause 
 } from 'lucide-react'
 
@@ -36,7 +36,7 @@ const ServicesCarousel = ({
       title: 'Accounting Services',
       description: 'Comprehensive accounting solutions from bookkeeping to financial statements, management accounts, and regulatory compliance.',
       features: ['Monthly Management Accounts', 'Annual Financial Statements', 'Bookkeeping', 'Payroll Administration'],
-      pricing: 'From R2,500/month',
+      pricing: 'From R3,800/month',
       link: '/services'
     },
     {
@@ -52,8 +52,16 @@ const ServicesCarousel = ({
       title: 'Business Advisory',
       description: 'Strategic guidance to help your business grow and thrive in competitive markets.',
       features: ['Business Strategy', 'Financial Planning', 'Risk Management', 'M&A Advisory'],
-      pricing: 'From R3,500/month',
+      pricing: 'From R7,500/month',
       link: '/services'
+    },
+    {
+      icon: ClipboardCheck,
+      title: 'Audit Consultants',
+      description: 'Audit readiness, internal control reviews, and compliance support alongside your appointed registered auditor.',
+      features: ['Audit Readiness', 'Internal Control Reviews', 'GRAP/IFRS Support', 'Auditor Liaison'],
+      pricing: 'Negotiated per engagement',
+      link: '/services/audit-consulting'
     }
   ]
 
@@ -181,7 +189,7 @@ const ServicesCarousel = ({
       )}
 
       {/* Quick Service Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
         {services.map((service, index) => (
           <div 
             key={index} 

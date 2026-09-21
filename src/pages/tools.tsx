@@ -2,15 +2,10 @@
 import { Link } from 'react-router-dom';
 import { Calculator, TrendingUp, Users, CheckCircle, Phone, Mail, Star, Zap, Shield, BarChart3, CreditCard } from 'lucide-react';
 import SEO from '../components/SEO';
-
-<SEO
-  title="Business Tools"
-  description="Access AlloB Consultants' suite of free business tools including PAYE calculator, invoice generator, payslip generator, and professional agreement templates."
-  keywords="business tools South Africa, free PAYE calculator, invoice generator, payslip generator, FynancKit"
-  canonical="/tools"
-/>
+import { getCurrentTaxYear } from '../utils/utils';
 
 const ToolsPage = () => {
+  const currentTaxYear = getCurrentTaxYear();
   const payeFeatures = [
     "Calculate accurate PAYE across multiple income sources",
     "Age-based tax rebates (65+ and 75+ considerations)",
@@ -18,12 +13,17 @@ const ToolsPage = () => {
     "Business expense deductions and carry-forwards",
     "PAYE comparison with actionable recommendations",
     "Monthly take-home pay calculations",
-    "2025 tax year compliance"
+    `${currentTaxYear} tax year compliance`
   ];
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+      <SEO
+        title="Business Tools"
+        description="Access AlloB Consultants' suite of free business tools including PAYE calculator, invoice generator, payslip generator, and professional agreement templates."
+        keywords={`business tools South Africa, free PAYE calculator, invoice generator, payslip generator, PAYE ${currentTaxYear}, Sormalitics`}
+        canonical="/tools"
+      />
       {/* Header */}
       <div className="bg-white shadow-sm border-b sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -107,7 +107,7 @@ const ToolsPage = () => {
 
                 <p className="text-gray-600 mb-6 text-lg">
                   South Africa's most accurate PAYE calculator. Eliminate year-end tax surprises with 
-                  our innovative multi-income tax planning tool. Built for the 2025 tax year with 
+                  our innovative multi-income tax planning tool. Built for the {currentTaxYear} tax year with 
                   professional-grade accuracy.
                 </p>
 
@@ -135,13 +135,16 @@ const ToolsPage = () => {
               {/* Visual/Stats */}
               <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 lg:p-12 flex items-center">
                 <div className="w-full">
+                  <div className="mb-6 bg-white rounded-xl shadow-sm p-4 flex justify-center">
+                    <img src="/sormalitics-logo.jpg" alt="Sormalitics — Summa de Arithmetica" className="max-h-28 w-auto rounded-lg" />
+                  </div>
                   <div className="grid grid-cols-2 gap-6">
                     <div className="text-center p-6 bg-white rounded-xl shadow-sm">
                       <div className="text-2xl font-bold text-green-600 mb-2">100%</div>
                       <div className="text-sm text-gray-600">SARS Accuracy</div>
                     </div>
                     <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-                      <div className="text-2xl font-bold text-green-600 mb-2">2025</div>
+                      <div className="text-2xl font-bold text-green-600 mb-2">{currentTaxYear}</div>
                       <div className="text-sm text-gray-600">Tax Year Ready</div>
                     </div>
                     <div className="text-center p-6 bg-white rounded-xl shadow-sm">
@@ -165,43 +168,46 @@ const ToolsPage = () => {
           </div>
         </div>
 
-        {/* FynancKit */}
+        {/* Sormalitics */}
         <div className="mb-16">
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div className="lg:grid lg:grid-cols-2 lg:gap-8">
               {/* Visual/Stats */}
-              <div className="bg-gradient-to-br from-purple-50 to-blue-100 p-8 lg:p-12 flex items-center lg:order-1">
+              <div className="bg-gradient-to-br from-amber-50 to-blue-100 p-8 lg:p-12 flex items-center lg:order-1">
                 <div className="w-full">
+                  <div className="mb-6 bg-white rounded-xl shadow-sm p-4 flex justify-center">
+                    <img src="/sormalitics-logo.jpg" alt="Sormalitics — Summa de Arithmetica" className="max-h-28 w-auto rounded-lg" />
+                  </div>
                   <div className="grid grid-cols-2 gap-6">
                     <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-                      <div className="text-2xl font-bold text-purple-600 mb-2">
+                      <div className="text-2xl font-bold text-blue-900 mb-2">
                         <CreditCard className="w-8 h-8 mx-auto" />
                       </div>
                       <div className="text-sm text-gray-600">Professional Invoices</div>
                     </div>
                     <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-                      <div className="text-2xl font-bold text-purple-600 mb-2">
+                      <div className="text-2xl font-bold text-blue-900 mb-2">
                         <BarChart3 className="w-8 h-8 mx-auto" />
                       </div>
                       <div className="text-sm text-gray-600">Smart Payslips</div>
                     </div>
                     <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-                      <div className="text-2xl font-bold text-purple-600 mb-2">
+                      <div className="text-2xl font-bold text-blue-900 mb-2">
                         <Users className="w-8 h-8 mx-auto" />
                       </div>
                       <div className="text-sm text-gray-600">Legal Agreements</div>
                     </div>
                     <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-                      <div className="text-2xl font-bold text-purple-600 mb-2">
+                      <div className="text-2xl font-bold text-blue-900 mb-2">
                         <Zap className="w-8 h-8 mx-auto" />
                       </div>
                       <div className="text-sm text-gray-600">Early Access</div>
                     </div>
                   </div>
                   <div className="mt-8 text-center">
-                    <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-lg">
+                    <div className="bg-gradient-to-r from-blue-900 to-blue-600 text-white p-4 rounded-lg">
                       <div className="text-lg font-semibold">Building the Future</div>
-                      <div className="text-sm mt-1">Full Accounting ERP + Payroll + Contract Management</div>
+                      <div className="text-sm mt-1">Accounting & Record-Keeping ERP — In Development for 2026</div>
                     </div>
                   </div>
                 </div>
@@ -210,13 +216,13 @@ const ToolsPage = () => {
               {/* Content */}
               <div className="p-8 lg:p-12 lg:order-2">
                 <div className="flex items-center mb-6">
-                  <div className="bg-purple-100 p-3 rounded-lg mr-4">
-                    <TrendingUp className="w-8 h-8 text-purple-600" />
+                  <div className="bg-amber-100 p-2 rounded-lg mr-4">
+                    <img src="/sormalitics-icon.png" alt="Sormalitics" className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900">FynancKit</h3>
+                    <h3 className="text-2xl font-bold text-gray-900">Sormalitics</h3>
                     <div className="flex items-center mt-1 space-x-2">
-                      <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">IN DEVELOPMENT</span>
+                      <span className="bg-amber-100 text-blue-900 text-xs font-semibold px-2.5 py-0.5 rounded">IN DEVELOPMENT — 2026</span>
                       <span className="bg-orange-100 text-orange-800 text-xs font-semibold px-2.5 py-0.5 rounded">EARLY ACCESS</span>
                     </div>
                   </div>
@@ -235,35 +241,36 @@ const ToolsPage = () => {
                 </div>
 
                 <p className="text-gray-600 mb-6 text-lg">
-                  The future of business management is coming! Professional invoices, payslips & agreements 
-                  that make you an established business. 
+                  We're developing Sormalitics, an ERP to help companies manage their accounting and
+                  record-keeping — alongside professional invoices, payslips, and agreements that make you
+                  an established business.
                 </p>
 
                 <div className="mb-8">
                   <h4 className="font-semibold text-gray-900 mb-4">Coming Soon:</h4>
                   <div className="grid grid-cols-1 gap-3">
                     <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700 text-sm">Professional Invoice Generator with VAT compliance</span>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700 text-sm">Smart Payslip Generator with SARS EMP201/EMP501 compliance</span>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700 text-sm">Legal Agreements & E-Sign workflows</span>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700 text-sm">Full Accounting ERP system (Future)</span>
+                      <CheckCircle className="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700 text-sm">Accounting & record-keeping ERP (2026)</span>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700 text-sm">Complete Payroll management (Future)</span>
                     </div>
                     <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-blue-900 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700 text-sm">Contract drafting & management (Future)</span>
                     </div>
                   </div>
@@ -271,19 +278,19 @@ const ToolsPage = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a 
-                    href="https://www.fynanckit.com" 
+                    href="https://sormalitics.com/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-6 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-colors font-semibold flex items-center justify-center space-x-2"
+                    className="flex-1 bg-gradient-to-r from-blue-900 to-blue-600 text-white py-3 px-6 rounded-lg hover:from-blue-950 hover:to-blue-700 transition-colors font-semibold flex items-center justify-center space-x-2"
                   >
                     <Star className="w-5 h-5" />
                     <span>Join Early Access</span>
                   </a>
                   <a 
-                    href="https://www.fynanckit.com" 
+                    href="https://sormalitics.com/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex-1 border-2 border-purple-600 text-purple-600 py-3 px-6 rounded-lg hover:bg-purple-50 transition-colors font-semibold flex items-center justify-center space-x-2"
+                    className="flex-1 border-2 border-blue-900 text-blue-900 py-3 px-6 rounded-lg hover:bg-amber-50 transition-colors font-semibold flex items-center justify-center space-x-2"
                   >
                     <TrendingUp className="w-5 h-5" />
                     <span>Preview Tools</span>
@@ -326,13 +333,13 @@ const ToolsPage = () => {
               </div>
             </div>
             <div className="text-center">
-              <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-8 h-8 text-purple-600" />
+              <div className="bg-amber-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-8 h-8 text-blue-900" />
               </div>
               <h4 className="font-semibold mb-2">Business Management</h4>
               <p className="text-gray-600 text-sm">Professional invoices, payslips & agreements</p>
               <div className="mt-2">
-                <span className="bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded">🚀 BUILDING</span>
+                <span className="bg-amber-100 text-blue-900 text-xs font-semibold px-2 py-1 rounded">🚀 BUILDING</span>
               </div>
             </div>
             <div className="text-center">
@@ -347,7 +354,7 @@ const ToolsPage = () => {
             </div>
           </div>
 
-          <div className="bg-gradient-to-r from-green-600 via-purple-600 to-blue-600 text-white p-6 rounded-xl mb-6">
+          <div className="bg-gradient-to-r from-green-600 via-blue-900 to-blue-600 text-white p-6 rounded-xl mb-6">
             <h4 className="text-lg font-bold mb-2">🎯 The Vision</h4>
             <p className="text-sm">
               From individual tax calculations to full business management - one integrated platform, 
@@ -363,18 +370,17 @@ const ToolsPage = () => {
             </button>
             </Link>
             <a 
-              href="https://www.fynanckit.com" 
+              href="https://sormalitics.com/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="bg-purple-600 text-white py-4 px-8 rounded-lg hover:bg-purple-700 transition-colors font-semibold flex items-center justify-center space-x-2"
+              className="bg-blue-900 text-white py-4 px-8 rounded-lg hover:bg-blue-950 transition-colors font-semibold flex items-center justify-center space-x-2"
             >
               <Star className="w-5 h-5" />
-              <span>Join FynancKit Early Access</span>
+              <span>Join Sormalitics Early Access</span>
             </a>
           </div>
         </div>
       </div>
-
 
     </div>
   );

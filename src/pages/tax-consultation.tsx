@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, CheckCircle, Star, Phone, Mail, User, Building, ArrowRight, Shield, Award, Users, AlertCircle } from 'lucide-react';
+import { Calendar, Clock, CheckCircle, Star, Phone, Mail, User, Building, ArrowRight, Shield, Award, AlertCircle } from 'lucide-react';
 import SEO from '../components/SEO';
-
-<SEO
-  title="Tax Consultation"
-  description="Book a professional tax consultation with AlloB Consultants. Expert tax advisory services for individuals and businesses across South Africa."
-  keywords="tax consultation South Africa, book tax advisor, tax planning Midrand, tax advisory services Gauteng"
-  canonical="/tax-consultation"
-/>
 
 declare var gtag: ((...args: any[]) => void) | undefined;
 
@@ -470,6 +463,12 @@ Email: ${customerData.email}`);
   if (isSubmitted && submissionResult) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
+        <SEO
+          title="Tax Consultation"
+          description="Book a professional tax consultation with AlloB Consultants. Expert tax advisory services for individuals and businesses across South Africa."
+          keywords="tax consultation South Africa, book tax advisor, tax planning Midrand, tax advisory services Gauteng"
+          canonical="/tax-consultation"
+        />
         <div className="max-w-2xl w-full bg-white rounded-xl shadow-lg p-8 text-center">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-10 h-10 text-green-600" />
@@ -596,8 +595,8 @@ Email: ${customerData.email}`);
                 <span>SARS Registered</span>
               </div>
               <div className="flex items-center">
-                <Users className="w-5 h-5 mr-2" />
-                <span>500+ Happy Clients</span>
+                <Clock className="w-5 h-5 mr-2" />
+                <span>10+ Years Experience</span>
               </div>
             </div>
           </div>

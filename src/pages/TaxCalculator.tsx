@@ -10,7 +10,8 @@ import type {
 } from '../types/calculator';
 import { 
     TAX_YEAR_DATA,
-    formatCurrency
+    formatCurrency,
+    getDefaultTaxYear
 } from '../types/calculator';
 import SEO from '../components/SEO';
 
@@ -532,7 +533,7 @@ const TaxCalculator = () => {
     const [workingConditions, setWorkingConditions] = useState<WorkingConditions>({ worksFromHome: false, hasDedicatedWorkspace: false, hasVariableTravelAllowance: false });
     const [medicalAid, setMedicalAid] = useState<MedicalAidInfo>({ isMainMember: true, numberOfDependents: 0, monthlyContribution: 0, hasDisability: false });
     const [otherDeductions, setOtherDeductions] = useState<OtherDeductions>(emptyOtherDeductions());
-    const [selectedYear, setSelectedYear] = useState<TaxYear>(2025);
+    const [selectedYear, setSelectedYear] = useState<TaxYear>(getDefaultTaxYear());
     const [age, setAge] = useState<number>(30);
     const [name, setName] = useState<string>('');
     const [surname, setSurname] = useState<string>('');
@@ -615,7 +616,7 @@ const TaxCalculator = () => {
             <SEO
                 title="PAYE Tax Calculator"
                 description="Calculate your PAYE tax obligations with AlloB's free South African PAYE calculator. Supports multiple income streams for accurate tax calculations."
-                keywords="PAYE calculator South Africa, tax calculator, income tax calculator, PAYE 2025, SARS tax calculator"
+                keywords={`PAYE calculator South Africa, tax calculator, income tax calculator, PAYE ${selectedYear}, SARS tax calculator`}
                 canonical="/paye-calculator"
             />
             {/* Header bar */}
@@ -788,7 +789,7 @@ const TaxCalculator = () => {
                                     </label>
                                 </div>
                                 <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-sm text-green-800">
-                                    <p className="font-semibold mb-1">2025/2026 Medical Aid Tax Credits (Section 6A):</p>
+                                    <p className="font-semibold mb-1">{selectedYear - 1}/{selectedYear} Medical Aid Tax Credits (Section 6A):</p>
                                     <p>Main member: R364/mth · First dependent: R364/mth · Additional dependents: R246/mth each</p>
                                     {age >= 65 && <p className="mt-1 font-medium">Age 65+: Additional deduction of 33% on excess contributions above 3× the tax credit</p>}
                                 </div>

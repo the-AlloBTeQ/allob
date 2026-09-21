@@ -18,10 +18,12 @@ const TaxCalculator = lazy(() => import('./pages/TaxCalculator'))
 const Tools = lazy(() => import('./pages/tools'))
 const CheckoutPage = lazy(() => import('./pages/checkout'))
 const TaxConsultation = lazy(() => import('./pages/tax-consultation'))
+const ServiceInquiry = lazy(() => import('./pages/service-inquiry'))
 const BusinessAdvisoryServices = lazy(() => import('./services/business-advisory'))
 const PayrollManagementServices = lazy(() => import('./services/payroll'))
 const DigitalTransformationServices = lazy(() => import('./services/digital-transformation'))
 const AccountingServices = lazy(() => import('./services/accounting'))  
+const AuditConsultingServices = lazy(() => import('./services/audit-consulting'))
 
 
 // Lazy load industry pages
@@ -32,6 +34,7 @@ const ProfessionalServices = lazy(() => import('./industry/professional'))
 const HealthcareServices = lazy(() => import('./industry/healthcare'))
 const ConstructionServices = lazy(() => import('./industry/construction'))
 const NPOServices = lazy(() => import('./industry/npo'))
+const ImportExportServices = lazy(() => import('./industry/import-export'))
 
 // Lazy load utility pages
 const TermsOfService = lazy(() => import('./pages/terms'))
@@ -166,6 +169,12 @@ function App() {
             </SuspenseWrapper>
           } />
           
+          <Route path="/service-inquiry" element={
+            <SuspenseWrapper>
+              <ServiceInquiry />
+            </SuspenseWrapper>
+          } />
+          
           {/* Industry-specific pages */}
           <Route path="/industries/tech" element={
             <SuspenseWrapper>
@@ -209,6 +218,12 @@ function App() {
               <NPOServices />
             </SuspenseWrapper>
           } />
+          
+          <Route path="/industries/import-export" element={
+            <SuspenseWrapper>
+              <ImportExportServices />
+            </SuspenseWrapper>
+          } />
 
           <Route path="/services/accounting" element={
             <SuspenseWrapper>
@@ -225,6 +240,12 @@ function App() {
           <Route path="/services/payroll" element={
             <SuspenseWrapper>
               <PayrollManagementServices />
+            </SuspenseWrapper>
+          } />
+
+          <Route path="/services/audit-consulting" element={
+            <SuspenseWrapper>
+              <AuditConsultingServices />
             </SuspenseWrapper>
           } />
           <Route path="/deals" element={

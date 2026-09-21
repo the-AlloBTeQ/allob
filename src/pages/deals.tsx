@@ -7,13 +7,6 @@ import {
 } from 'lucide-react';
 import SEO from '../components/SEO';
 
-<SEO
-  title="Deal Origination"
-  description="AlloB Consultants identifies, packages, and prepares investment opportunities across South Africa — connecting businesses seeking funding with our financing partner network."
-  keywords="deal origination South Africa, investment opportunities, financing readiness, business funding, deal packaging Gauteng"
-  canonical="/deals"
-/>
-
 const DealsPage = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -303,10 +296,9 @@ const DealsPage = () => {
   ];
 
   const stats = [
-    { value: "8+", label: "Years of Experience", icon: Award },
+    { value: "10+", label: "Years of Experience", icon: Award },
     { value: "6", label: "Target Sectors", icon: FileSearch },
     { value: "5+", label: "Financing Partners", icon: Users2 },
-    //{ value: "98%", label: "Client Satisfaction", icon: TrendingUp }
   ];
 
   const containerVariants = {
@@ -328,6 +320,12 @@ const DealsPage = () => {
 
   return (
     <div className="font-sans bg-gray-50">
+      <SEO
+        title="Deal Origination"
+        description="AlloB Consultants identifies, packages, and prepares investment opportunities across South Africa — connecting businesses seeking funding with our financing partner network."
+        keywords="deal origination South Africa, investment opportunities, financing readiness, business funding, deal packaging Gauteng"
+        canonical="/deals"
+      />
 
       {/* ── HERO ── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-blue-900">

@@ -2,13 +2,6 @@ import { Link } from 'react-router-dom'
 import { Shield, Award, Users, TrendingUp, Target, BookOpen, Globe, CheckCircle } from 'lucide-react'
 import SEO from '../components/SEO';
 
-<SEO
-  title="About Us"
-  description="Learn about AlloB Consultants — a dynamic consulting firm based in Midrand, Gauteng, committed to Integrity and Innovation since 2016."
-  keywords="about AlloB Consultants, accounting firm Midrand, business consulting Gauteng, AlloB Polompa"
-  canonical="/about"
-/>
-
 const About = () => {
   const values = [
     {
@@ -33,7 +26,6 @@ const About = () => {
     }
   ]
 
-
   const certifications = [
     'SAICA (South African Institute of Chartered Accountants)',
     'ACA BFP (Associate Chartered Accountant, Business Finance Professional)',
@@ -48,19 +40,14 @@ const About = () => {
       description: 'AlloB Consultants was established to provide professional accounting and advisory services.'
     },
     {
-      year: '2018',
-      title: 'Service Expansion',
-      description: 'Expanded our service offerings to include comprehensive tax planning and consulting.'
+      year: 'Ongoing',
+      title: 'Multi-Province Growth',
+      description: 'Grew our footprint across Gauteng, Mokopane, and Graaff-Reinet, and formed a professional affiliation with Waterfall Chambers to broaden the services we can offer clients.'
     },
     {
-      year: '2020',
-      title: 'Digital Transformation',
-      description: 'Implemented cloud-based solutions to enhance client service delivery and operational efficiency.'
-    },
-    {
-      year: '2022',
-      title: 'Growth Milestone',
-      description: 'Reached significant client growth and expanded our professional team to serve more industries.'
+      year: '2026',
+      title: 'Sormalitics ERP Development',
+      description: 'Developing Sormalitics, our ERP built to help companies manage their accounting and record-keeping.'
     }
   ]
 
@@ -87,6 +74,12 @@ const About = () => {
 
   return (
     <div>
+      <SEO
+        title="About Us"
+        description="Learn about AlloB Consultants — a dynamic consulting firm based in Midrand, Gauteng, committed to Integrity and Innovation since 2016."
+        keywords="about AlloB Consultants, accounting firm Midrand, business consulting Gauteng, AlloB Polompa"
+        canonical="/about"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

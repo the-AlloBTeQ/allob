@@ -402,7 +402,7 @@ const ConstructionServices = () => {
               Construction Success Stories
             </h2>
             <p className="text-xl text-gray-600">
-              Real results from our construction clients
+              Illustrative examples based on our experience with construction clients
             </p>
           </div>
 
@@ -413,6 +413,7 @@ const ConstructionServices = () => {
                   {study.industry}
                 </div>
                 <h3 className="text-xl font-bold mb-4">{study.title}</h3>
+                <p className="text-xs text-gray-400 italic mb-4">Illustrative example — not an actual client engagement</p>
                 
                 <div className="space-y-4">
                   <div>
@@ -492,10 +493,10 @@ const ConstructionServices = () => {
               Schedule Consultation
             </Link>
             <Link
-              to="/tax-consultation"
+              to="/service-inquiry?industry=construction"
               className="border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white/10 font-semibold transition-colors"
             >
-              Construction Tax Services
+              Construction Accounting Services
             </Link>
           </div>
         </div>

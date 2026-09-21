@@ -5,13 +5,6 @@ import {
 } from 'lucide-react'
 import SEO from '../components/SEO';
 
-<SEO
-  title="Industries We Serve"
-  description="AlloB Consultants serves clients across multiple industries in South Africa including retail, manufacturing, technology, healthcare, agriculture, and professional services."
-  keywords="industries served, accounting for retail, manufacturing advisory, healthcare consulting South Africa"
-  canonical="/industries"
-/>
-
 interface Industry {
   id: string
   name: string
@@ -152,17 +145,17 @@ const Industries = () => {
       id: 'import-export',
       name: 'Import/Export',
       icon: Truck,
-      description: 'Specialized services for import/export businesses dealing with international trade and customs compliance.',
+      description: 'Specialized services for import/export businesses, including customs registration, licensing, and international trade compliance.',
       challenges: [
+        'Customs registration and licensing',
         'Customs and duties accounting',
         'Multi-currency transactions',
-        'International tax compliance',
-        'Trade finance management'
+        'International tax compliance'
       ],
       solutions: [
+        'Customs registration and import/export licence applications',
         'Customs duty optimization',
         'Multi-currency accounting',
-        'International tax planning',
         'Trade finance advisory'
       ],
       link: '/industries/import-export'
@@ -189,14 +182,17 @@ const Industries = () => {
   ]
 
   const stats = [
-    { number: '8+', label: 'Industries Served' },
-    { number: '50+', label: 'Active Clients' },
-    { number: '98%', label: 'Client Retention' },
-    { number: '100+', label: 'Projects Completed' }
+    { number: '8', label: 'Industries Served' }
   ]
 
   return (
     <div>
+      <SEO
+        title="Industries We Serve"
+        description="AlloB Consultants serves clients across multiple industries in South Africa including retail, manufacturing, technology, healthcare, agriculture, and professional services."
+        keywords="industries served, accounting for retail, manufacturing advisory, healthcare consulting South Africa"
+        canonical="/industries"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -215,7 +211,7 @@ const Industries = () => {
       {/* Stats Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="flex justify-center">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
@@ -342,7 +338,7 @@ const Industries = () => {
         </div>
       </section>
 
-      {/* Success Stories */}
+      {/* Success Stories *
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">

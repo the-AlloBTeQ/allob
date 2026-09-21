@@ -10,7 +10,7 @@ import type {
     TaxYear,
     Income
 } from '../../types/calculator';
-import { TAX_YEAR_DATA } from '../../types/calculator';
+import { TAX_YEAR_DATA, getDefaultTaxYear } from '../../types/calculator';
 
 
 export function formatCurrency(value: number): string {
@@ -176,14 +176,15 @@ export const calculateTaxLiability = (
     employers: Employer[],
     workingConditions: WorkingConditions,
     age: number,
-    taxYear: TaxYear = 2025
+    taxYear: TaxYear = getDefaultTaxYear()
 ): TaxCalculationResult => {
     const warnings: string[] = [];
     
     // Validate tax year
     if (!TAX_YEAR_DATA[taxYear]) {
-        warnings.push(`Tax year ${taxYear} not found, using 2025 data`);
-        taxYear = 2025;
+        const fallbackYear = getDefaultTaxYear();
+        warnings.push(`Tax year ${taxYear} not found, using ${fallbackYear} data`);
+        taxYear = fallbackYear;
     }
     
     // Calculate gross income

@@ -5,15 +5,10 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-
-<SEO
-  title="Accounting, Tax & Business Advisory"
-  description="AlloB Consultants delivers accounting, tax advisory, business advisory, and deal origination services across South Africa. Based in Midrand, Gauteng."
-  keywords="accounting services South Africa, tax advisory Midrand, business advisory Gauteng, PAYE calculator, deal origination"
-  canonical="/"
-/>
+import { getCurrentTaxYear } from '../utils/utils';
 
 const LandingPage = () => {
+  const currentTaxYear = getCurrentTaxYear();
   // State management
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -21,10 +16,7 @@ const LandingPage = () => {
 
   // Stats data
   const stats = [
-    { label: 'Years of Experience', value: '8+', icon: Award },
-    { label: 'Served Clients', value: '100+', icon: Users },
-    { label: 'Tax Returns Filed', value: '75+', icon: FileText },
-    { label: 'Client Satisfaction', value: '98%', icon: Target }
+    { label: 'Years of Experience', value: '10+', icon: Award }
   ];
 
   // Main services data
@@ -34,7 +26,7 @@ const LandingPage = () => {
       description: 'Comprehensive accounting solutions from bookkeeping to financial statements, management accounts, and regulatory compliance for businesses of all sizes.',
       features: ['Monthly Management Accounts', 'Annual Financial Statements (AFS)', 'Bookkeeping & Record Maintenance', 'Payroll Administration'],
       color: 'blue',
-      pricing: 'From R2,500/month',
+      pricing: 'From R3,800/month',
       link: '/services/accounting'
     },
     {
@@ -50,8 +42,16 @@ const LandingPage = () => {
       description: 'Strategic guidance to help your business grow and thrive in competitive markets with expert financial insights and planning.',
       features: ['Business Strategy Development', 'Financial Planning & Forecasting', 'Risk Management', 'Mergers & Acquisitions'],
       color: 'purple',
-      pricing: 'From R3,500/month',
+      pricing: 'From R7,500/month',
       link: '/services/business-advisory'
+    },
+    {
+      title: 'Audit Consultants',
+      description: 'Audit readiness, internal control reviews, and GRAP/IFRS compliance support — preparing you for your external audit and supporting you through it. AlloB Consultants is SAICA accredited; audit consulting support is provided alongside your appointed registered auditor.',
+      features: ['Audit Readiness & Preparation', 'Internal Control Reviews', 'GRAP/IFRS Compliance Support', 'External Auditor Liaison'],
+      color: 'indigo',
+      pricing: 'Negotiated per engagement',
+      link: '/services/audit-consulting'
     }
   ];
 
@@ -70,7 +70,7 @@ const LandingPage = () => {
     {
       title: 'Tax Insight',
       items: [
-        'SARS Compliance Updates 2025',
+        `SARS Compliance Updates ${currentTaxYear}`,
         'Individual vs Corporate Tax Planning',
         'VAT Registration Benefits',
         'PAYE Multi-Income Stream Planning',
@@ -95,9 +95,9 @@ const LandingPage = () => {
       category: 'Accounting Tools',
       items: [
         {
-          name: 'FynancKit',
+          name: 'Sormalitics',
           description: 'Your document repository - Generate your invoices and payslips',
-          subtext: 'Professional invoice generation with blockchain verification and multi-currency support'
+          subtext: 'Professional invoice generation with multi-currency support'
         }
       ]
     },
@@ -115,7 +115,7 @@ const LandingPage = () => {
       category: 'Business Advisory Tools',
       items: [
         {
-          name: 'FynancKit',
+          name: 'Sormalitics',
           description: 'Keep the professional agreements at your fingertips',
           subtext: 'Digital contract and agreement management system for businesses'
         }
@@ -153,6 +153,12 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Accounting, Tax & Business Advisory"
+        description="AlloB Consultants delivers accounting, tax advisory, business advisory, and deal origination services across South Africa. Based in Midrand, Gauteng."
+        keywords="accounting services South Africa, tax advisory Midrand, business advisory Gauteng, PAYE calculator, deal origination"
+        canonical="/"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-cyan-300 via-cyan-800 to-cyan-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -266,12 +272,12 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Stats Section 
       <section className="py-16 bg-blue-50 border-4 border-blue-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="text-center w-48">
                 <div className="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
                   <stat.icon className="w-8 h-8 text-blue-600" />
                 </div>
@@ -321,19 +327,19 @@ const LandingPage = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* FynancKit Showcase */}
+            {/* Sormalitics Showcase */}
             <div className="bg-white rounded-xl shadow-lg p-8">
               <div className="text-center mb-6">
                 <div className="bg-blue-100 w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <FileText className="w-8 h-8 text-blue-600" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">FynancKit</h3>
-                <p className="text-blue-600 font-semibold">Professional Document Management</p>
+                <h3 className="text-2xl font-bold mb-2">Sormalitics</h3>
+                <p className="text-blue-600 font-semibold">Accounting & Record-Keeping ERP — In Development for 2026</p>
               </div>
               <div className="space-y-4">
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <h4 className="font-semibold text-gray-800 mb-2">Invoice Generation</h4>
-                  <p className="text-sm text-gray-600">Professional invoices with blockchain verification and multi-currency support</p>
+                  <p className="text-sm text-gray-600">Professional invoices with multi-currency support</p>
                 </div>
                 <div className="bg-green-50 p-4 rounded-lg">
                   <h4 className="font-semibold text-gray-800 mb-2">Payslip Creation</h4>
@@ -343,10 +349,14 @@ const LandingPage = () => {
                   <h4 className="font-semibold text-gray-800 mb-2">Agreement Management</h4>
                   <p className="text-sm text-gray-600">Digital contract repository at your fingertips</p>
                 </div>
+                <div className="bg-yellow-50 p-4 rounded-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">Accounting ERP (2026)</h4>
+                  <p className="text-sm text-gray-600">Full accounting and record-keeping system, currently in development</p>
+                </div>
               </div>
-              <a href="https://www.fynanckit.com" target="_blank" rel="noopener noreferrer">
+              <a href="https://sormalitics.com/" target="_blank" rel="noopener noreferrer">
                 <button className="w-full mt-6 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
-                  Try FynancKit
+                  Explore Sormalitics
                 </button>
               </a>
             </div>

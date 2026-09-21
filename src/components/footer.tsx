@@ -37,13 +37,13 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://www.fynanckit.com" 
+                  href="https://sormalitics.com/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors flex items-center space-x-2"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  <span>FynancKit</span>
+                  <span>Sormalitics</span>
                   <span className="bg-purple-100 text-purple-800 text-xs px-1.5 py-0.5 rounded">EARLY ACCESS</span>
                 </a>
               </li>
@@ -78,6 +78,11 @@ const Footer = () => {
               <li>
                 <a href="/services/payroll" className="hover:text-white transition-colors">
                   Payroll Management
+                </a>
+              </li>
+              <li>
+                <a href="/services/audit-consulting" className="hover:text-white transition-colors">
+                  Audit Consultants
                 </a>
               </li>
             </ul>

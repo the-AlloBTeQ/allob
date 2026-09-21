@@ -1,14 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Calculator, FileText, Briefcase, CheckCircle, ArrowRight, Phone } from 'lucide-react'
+import { Calculator, FileText, Briefcase, ClipboardCheck, CheckCircle, ArrowRight, Phone } from 'lucide-react'
 import SEO from '../components/SEO';
-
-<SEO
-  title="Our Services"
-  description="Explore AlloB Consultants' full range of services including accounting, tax planning, company secretarial, management accounts, and strategic business advisory."
-  keywords="accounting services, tax planning, company secretarial, management accounts, business advisory South Africa"
-  canonical="/services"
-/>
 
 interface Service {
   id: string
@@ -19,6 +12,7 @@ interface Service {
   features: string[]
   benefits: string[]
   pricing: string
+  negotiatedPricing?: boolean
 }
 
 const Services = () => {
@@ -31,7 +25,7 @@ const Services = () => {
       description: 'Comprehensive accounting solutions to keep your business finances in perfect order and ensure regulatory compliance.',
       icon: Calculator,
       color: 'blue',
-      pricing: 'From R2,500/month',
+      pricing: 'From R3,800/month',
       features: [
         'Monthly Management Accounts',
         'Annual Financial Statements (AFS)',
@@ -83,7 +77,7 @@ const Services = () => {
       description: 'Strategic guidance to help your business grow and thrive in competitive markets with expert insights.',
       icon: Briefcase,
       color: 'purple',
-      pricing: 'From R3,500/month',
+      pricing: 'From R7,500/month',
       features: [
         'Business Strategy Development',
         'Financial Planning & Forecasting',
@@ -101,6 +95,31 @@ const Services = () => {
         'Market Expansion Support',
         'Investment Readiness',
         'Operational Efficiency'
+      ]
+    },
+    {
+      id: 'audit',
+      title: 'Audit Consultants',
+      description: 'Audit readiness, internal control reviews, and compliance support to help you prepare for and navigate your external audit — delivered alongside your appointed registered auditor.',
+      icon: ClipboardCheck,
+      color: 'indigo',
+      pricing: 'Negotiated per engagement',
+      negotiatedPricing: true,
+      features: [
+        'Audit Readiness & Preparation',
+        'Working Paper & PBC Schedule Preparation',
+        'Internal Control & Risk Reviews (COSO-aligned)',
+        'GRAP 104/108 & IFRS Compliance Support',
+        'External Quality Assurance (EQA) Reviews',
+        'Liaison Support with Your Registered Auditor'
+      ],
+      benefits: [
+        'Smoother External Audit Process',
+        'Fewer Audit Findings & Queries',
+        'Strengthened Internal Controls',
+        'Public Sector (GRAP) Compliance Confidence',
+        'Objective Support Without Independence Conflicts',
+        'Experienced CA(SA)-Led Preparation'
       ]
     }
   ]
@@ -130,6 +149,12 @@ const Services = () => {
 
   return (
     <div>
+      <SEO
+        title="Our Services"
+        description="Explore AlloB Consultants' full range of services including accounting, tax planning, company secretarial, management accounts, and strategic business advisory."
+        keywords="accounting services, tax planning, company secretarial, management accounts, business advisory South Africa"
+        canonical="/services"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -218,10 +243,10 @@ const Services = () => {
                     
                     <div className="mt-8 space-y-4">
                       <Link
-                        to="/checkout"
+                        to={service.negotiatedPricing ? `/checkout?package=${service.id}` : "/checkout"}
                         className={`w-full bg-${service.color}-600 text-white px-8 py-3 rounded-lg hover:bg-${service.color}-700 font-semibold transition-colors flex items-center justify-center`}
                       >
-                        Get Started <ArrowRight className="w-5 h-5 ml-2" />
+                        {service.negotiatedPricing ? 'Request a Quote' : 'Get Started'} <ArrowRight className="w-5 h-5 ml-2" />
                       </Link>
                       <a
                         href="tel:+270679211947"
@@ -282,7 +307,7 @@ const Services = () => {
             <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
               <h3 className="text-2xl font-bold mb-4">Starter</h3>
               <p className="text-gray-600 mb-6">Perfect for small businesses and startups</p>
-              <div className="text-3xl font-bold text-blue-600 mb-6">R3,500/month</div>
+              <div className="text-3xl font-bold text-blue-600 mb-6">R4,200/month</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
@@ -316,7 +341,7 @@ const Services = () => {
               </div>
               <h3 className="text-2xl font-bold mb-4">Professional</h3>
               <p className="text-gray-600 mb-6">Comprehensive services for growing businesses</p>
-              <div className="text-3xl font-bold text-blue-600 mb-6">R7,500/month</div>
+              <div className="text-3xl font-bold text-blue-600 mb-6">R9,500/month</div>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
