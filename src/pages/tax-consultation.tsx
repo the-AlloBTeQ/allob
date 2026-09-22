@@ -701,10 +701,10 @@ Email: ${customerData.email}`);
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="full-name">
                       Full Name *
                     </label>
-                    <input
+                    <input aria-invalid={!!errors.fullName} aria-describedby={errors.fullName ? 'fullName-error' : undefined} id="full-name"
                       type="text"
                       name="fullName"
                       value={formData.fullName}
@@ -717,15 +717,15 @@ Email: ${customerData.email}`);
                       placeholder="Enter your full name"
                     />
                     {errors.fullName && (
-                      <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+                      <p id="fullName-error" role="alert" className="text-red-500 text-sm mt-1">{errors.fullName}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="email-address">
                       Email Address *
                     </label>
-                    <input
+                    <input aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} id="email-address"
                       type="email"
                       name="email"
                       value={formData.email}
@@ -738,15 +738,15 @@ Email: ${customerData.email}`);
                       placeholder="your@email.com"
                     />
                     {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                      <p id="email-error" role="alert" className="text-red-500 text-sm mt-1">{errors.email}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="phone-number">
                       Phone Number *
                     </label>
-                    <input
+                    <input aria-invalid={!!errors.phone} aria-describedby={errors.phone ? 'phone-error' : undefined} id="phone-number"
                       type="tel"
                       name="phone"
                       value={formData.phone}
@@ -759,15 +759,15 @@ Email: ${customerData.email}`);
                       placeholder="+27 11 123 4567"
                     />
                     {errors.phone && (
-                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                      <p id="phone-error" role="alert" className="text-red-500 text-sm mt-1">{errors.phone}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="preferred-contact-method">
                       Preferred Contact Method
                     </label>
-                    <select
+                    <select id="preferred-contact-method"
                       name="preferredContactMethod"
                       value={formData.preferredContactMethod}
                       onChange={handleInputChange}
@@ -792,10 +792,10 @@ Email: ${customerData.email}`);
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="business-name-optional">
                       Business Name (Optional)
                     </label>
-                    <input
+                    <input id="business-name-optional"
                       type="text"
                       name="businessName"
                       value={formData.businessName}
@@ -808,10 +808,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="business-type">
                       Business Type
                     </label>
-                    <select
+                    <select id="business-type"
                       name="businessType"
                       value={formData.businessType}
                       onChange={handleInputChange}
@@ -827,10 +827,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="industry">
                       Industry
                     </label>
-                    <select
+                    <select id="industry"
                       name="industry"
                       value={formData.industry}
                       onChange={handleInputChange}
@@ -845,10 +845,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="annual-income-range">
                       Annual Income Range
                     </label>
-                    <select
+                    <select id="annual-income-range"
                       name="annualIncome"
                       value={formData.annualIncome}
                       onChange={handleInputChange}
@@ -873,10 +873,10 @@ Email: ${customerData.email}`);
                 
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="current-tax-situation">
                       Current Tax Situation
                     </label>
-                    <select
+                    <select id="current-tax-situation"
                       name="currentTaxSituation"
                       value={formData.currentTaxSituation}
                       onChange={handleInputChange}
@@ -896,10 +896,10 @@ Email: ${customerData.email}`);
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="how-urgent-is-this-consultation">
                         How urgent is this consultation?
                       </label>
-                      <select
+                      <select id="how-urgent-is-this-consultation"
                         name="urgency"
                         value={formData.urgency}
                         onChange={handleInputChange}
@@ -914,10 +914,10 @@ Email: ${customerData.email}`);
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="do-you-currently-have-an-accountant">
                         Do you currently have an accountant?
                       </label>
-                      <select
+                      <select id="do-you-currently-have-an-accountant"
                         name="previousAccountant"
                         value={formData.previousAccountant}
                         onChange={handleInputChange}
@@ -934,10 +934,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="specific-tax-concerns-or-questions">
                       Specific Tax Concerns or Questions
                     </label>
-                    <textarea
+                    <textarea id="specific-tax-concerns-or-questions"
                       name="specificConcerns"
                       value={formData.specificConcerns}
                       onChange={handleInputChange}
@@ -960,10 +960,10 @@ Email: ${customerData.email}`);
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="how-did-you-hear-about-us">
                       How did you hear about us?
                     </label>
-                    <select
+                    <select id="how-did-you-hear-about-us"
                       name="howDidYouHear"
                       value={formData.howDidYouHear}
                       onChange={handleInputChange}
@@ -982,10 +982,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="preferred-consultation-time">
                       Preferred Consultation Time
                     </label>
-                    <select
+                    <select id="preferred-consultation-time"
                       name="preferredTime"
                       value={formData.preferredTime}
                       onChange={handleInputChange}
@@ -1001,10 +1001,10 @@ Email: ${customerData.email}`);
                 </div>
                 
                 <div className="mt-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="additional-notes">
                     Additional Notes
                   </label>
-                  <textarea
+                  <textarea id="additional-notes"
                     name="additionalNotes"
                     value={formData.additionalNotes}
                     onChange={handleInputChange}

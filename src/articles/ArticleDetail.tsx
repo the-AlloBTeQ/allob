@@ -189,11 +189,17 @@ const ArticleErrorFallback = ({ error, retry }: { error: Error; retry: () => voi
 
 // Toast notification
 const Toast = ({ message, type, onClose }: { message: string; type: 'success' | 'error'; onClose: () => void }) => (
-  <div className={`fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg ${
-    type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
-  } transition-opacity duration-300 flex items-center`}>
+  <div
+    role={type === 'error' ? 'alert' : 'status'}
+    aria-live={type === 'error' ? 'assertive' : 'polite'}
+    className={`fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg ${
+      type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+    } transition-opacity duration-300 flex items-center`}
+  >
     <span>{message}</span>
-    <button onClick={onClose} className="ml-4 font-bold text-xl">&times;</button>
+    <button onClick={onClose} aria-label="Dismiss notification" className="ml-4 font-bold text-xl">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 );
 

@@ -411,9 +411,9 @@ const formatCurrency: FormatCurrency = (amount) => {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b">
-                      <th className="text-left py-2">Range</th>
-                      <th className="text-right py-2">Calculations</th>
-                      <th className="text-right py-2">%</th>
+                      <th scope="col" className="text-left py-2">Range</th>
+                      <th scope="col" className="text-right py-2">Calculations</th>
+                      <th scope="col" className="text-right py-2">%</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -480,11 +480,11 @@ const formatCurrency: FormatCurrency = (amount) => {
               <table className="w-full">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left py-2">Salary Range</th>
-                    <th className="text-right py-2">Calculations</th>
-                    <th className="text-right py-2">Avg Salary</th>
-                    <th className="text-right py-2">Avg Tax</th>
-                    <th className="text-right py-2">Effective Rate</th>
+                    <th scope="col" className="text-left py-2">Salary Range</th>
+                    <th scope="col" className="text-right py-2">Calculations</th>
+                    <th scope="col" className="text-right py-2">Avg Salary</th>
+                    <th scope="col" className="text-right py-2">Avg Tax</th>
+                    <th scope="col" className="text-right py-2">Effective Rate</th>
                   </tr>
                 </thead>
                 <tbody>

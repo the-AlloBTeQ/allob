@@ -385,6 +385,7 @@ const ReportGenerator: React.FC<ReportGeneratorProps> = ({
                         <div className="flex gap-3">
                             <input 
                                 type="email" 
+                                aria-label="Email address to send the report to" 
                                 value={email} 
                                 onChange={(e) => setEmail(e.target.value)} 
                                 placeholder="Enter email address" 

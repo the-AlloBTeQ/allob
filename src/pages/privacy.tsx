@@ -1,4 +1,4 @@
-import { Shield, Eye, Database, UserCheck, Mail, Phone } from 'lucide-react';
+import { Shield, Eye, Database, UserCheck, Mail, Phone, XCircle, Lock } from 'lucide-react';
 
 const PrivacyPolicy = () => {
   return (
@@ -36,10 +36,11 @@ const PrivacyPolicy = () => {
               Introduction
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              AlloB Consultants ("we," "our," or "us") is committed to protecting your privacy. 
-              This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
-              when you visit our website or use our services. Please read this privacy policy carefully. 
-              If you do not agree with the terms of this privacy policy, please do not access the site.
+              AlloB Consultants ("we," "our," or "us") is a SAICA accredited accounting and tax practice
+              (SAICA Practice No. 31838440) based in Midrand, South Africa. We are committed to protecting
+              your privacy in accordance with South Africa's Protection of Personal Information Act, 2013
+              (POPIA). This Privacy Policy explains what information this website collects, how we use it,
+              and your rights regarding that information. Please read it carefully.
             </p>
           </section>
 
@@ -52,27 +53,38 @@ const PrivacyPolicy = () => {
             
             <div className="space-y-6">
               <div className="bg-blue-50 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Personal Information</h3>
-                <p className="text-gray-700 mb-3">We may collect personal information that you provide directly to us, including:</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Information You Provide to Us</h3>
+                <p className="text-gray-700 mb-3">
+                  We only collect personal information when you voluntarily submit it through a form on this
+                  website — for example, when requesting a consultation, a service quote, or an inquiry. This
+                  may include:
+                </p>
                 <ul className="list-disc list-inside text-gray-700 space-y-1">
-                  <li>Name and contact information (email, phone number, address)</li>
-                  <li>Business information and financial details</li>
-                  <li>Tax identification numbers and related documents</li>
-                  <li>Payment and billing information</li>
-                  <li>Communications with our team</li>
+                  <li>Name and contact details (email address, phone number)</li>
+                  <li>Business name, business type, and industry</li>
+                  <li>Information you share about your needs — for example, services required, an
+                    approximate turnover range, or your current accounting arrangements</li>
+                  <li>Any other information you choose to include in your message to us</li>
                 </ul>
               </div>
 
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Automatically Collected Information</h3>
-                <p className="text-gray-700 mb-3">When you visit our website, we may automatically collect:</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                  <XCircle className="w-5 h-5 mr-2 text-gray-500" />
+                  What We Do Not Collect
+                </h3>
+                <p className="text-gray-700 mb-3">In the interest of transparency, this website currently does not:</p>
                 <ul className="list-disc list-inside text-gray-700 space-y-1">
-                  <li>IP address and device information</li>
-                  <li>Browser type and version</li>
-                  <li>Pages visited and time spent on our site</li>
-                  <li>Referring website information</li>
-                  <li>Cookies and similar tracking technologies</li>
+                  <li>Use cookies, analytics software, or tracking scripts to monitor your browsing activity</li>
+                  <li>Process payments or collect payment or billing details</li>
+                  <li>Collect tax identification numbers or supporting documents through the website itself
+                    (these are only exchanged directly with your consultant once you become a client)</li>
+                  <li>Operate an email newsletter</li>
                 </ul>
+                <p className="text-gray-700 mt-3 text-sm">
+                  We do keep an anonymous count of how many times each article on our site has been read.
+                  This count is not linked to your identity, IP address, or any other personal information.
+                </p>
               </div>
             </div>
           </section>
@@ -84,43 +96,31 @@ const PrivacyPolicy = () => {
               How We Use Your Information
             </h2>
             
-            <p className="text-gray-700 mb-4">We use the information we collect for various purposes, including:</p>
+            <p className="text-gray-700 mb-4">We use the information you submit to us for the following purposes:</p>
             
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-3">
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
-                  <p className="text-gray-700">Providing and maintaining our services</p>
+                  <p className="text-gray-700">Responding to your enquiry or consultation request</p>
                 </div>
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
-                  <p className="text-gray-700">Processing transactions and payments</p>
+                  <p className="text-gray-700">Preparing quotes or proposals for the services you've asked about</p>
                 </div>
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
-                  <p className="text-gray-700">Communicating with you about our services</p>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
-                  <p className="text-gray-700">Improving our website and services</p>
+                  <p className="text-gray-700">Communicating with you about your enquiry</p>
                 </div>
               </div>
               <div className="space-y-3">
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
-                  <p className="text-gray-700">Complying with legal and regulatory requirements</p>
+                  <p className="text-gray-700">Complying with our legal and professional obligations (including SAICA and, where applicable, FICA client due diligence)</p>
                 </div>
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
-                  <p className="text-gray-700">Preventing fraud and ensuring security</p>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
-                  <p className="text-gray-700">Sending relevant updates and newsletters</p>
-                </div>
-                <div className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3"></div>
-                  <p className="text-gray-700">Analyzing usage patterns and trends</p>
+                  <p className="text-gray-700">Improving this website based on the enquiries we receive</p>
                 </div>
               </div>
             </div>
@@ -130,15 +130,16 @@ const PrivacyPolicy = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Information Sharing and Disclosure</h2>
             <p className="text-gray-700 mb-4">
-              We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, 
+              We do not sell or trade your personal information. Information you submit through this website
+              is sent directly to the relevant AlloB Consultants team and is not shared with third parties,
               except in the following circumstances:
             </p>
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-6">
               <ul className="text-gray-700 space-y-2">
-                <li><strong>Service Providers:</strong> Trusted third parties who assist in operating our business</li>
+                <li><strong>Hosting and Email Providers:</strong> The infrastructure providers who host this website and deliver enquiry emails to us</li>
                 <li><strong>Legal Requirements:</strong> When required by law or to protect our legal rights</li>
-                <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
                 <li><strong>Consent:</strong> When you have given us explicit permission to share your information</li>
+                <li><strong>Professional Engagement:</strong> If, once you are a client, we need to involve another professional in your matter — always with your knowledge</li>
               </ul>
             </div>
           </section>
@@ -147,36 +148,35 @@ const PrivacyPolicy = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Data Security</h2>
             <p className="text-gray-700 mb-4">
-              We implement appropriate technical and organizational security measures to protect your personal information against 
-              unauthorized access, alteration, disclosure, or destruction. These measures include:
+              We take reasonable steps to protect the information you send us:
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               <div className="bg-green-50 p-4 rounded-lg text-center">
-                <Shield className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900">Encryption</h3>
-                <p className="text-sm text-gray-600">SSL/TLS encryption for data transmission</p>
+                <Lock className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                <h3 className="font-semibold text-gray-900">Encrypted Connection</h3>
+                <p className="text-sm text-gray-600">This website is served over an encrypted (HTTPS) connection</p>
               </div>
               <div className="bg-blue-50 p-4 rounded-lg text-center">
-                <Database className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900">Secure Storage</h3>
-                <p className="text-sm text-gray-600">Protected servers and databases</p>
+                <Mail className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                <h3 className="font-semibold text-gray-900">Direct Delivery</h3>
+                <p className="text-sm text-gray-600">Form submissions are sent by email directly to our team</p>
               </div>
               <div className="bg-purple-50 p-4 rounded-lg text-center">
                 <UserCheck className="w-8 h-8 text-purple-600 mx-auto mb-2" />
                 <h3 className="font-semibold text-gray-900">Access Control</h3>
-                <p className="text-sm text-gray-600">Limited access on need-to-know basis</p>
+                <p className="text-sm text-gray-600">Limited to authorised AlloB Consultants staff on a need-to-know basis</p>
               </div>
             </div>
           </section>
 
           {/* Your Rights */}
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Your Rights and Choices</h2>
-            <p className="text-gray-700 mb-4">You have certain rights regarding your personal information:</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Your Rights Under POPIA</h2>
+            <p className="text-gray-700 mb-4">Under the Protection of Personal Information Act, you have the right to:</p>
             <div className="space-y-3">
               <div className="flex items-center p-3 bg-gray-50 rounded">
                 <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
-                <span className="text-gray-700"><strong>Access:</strong> Request a copy of your personal information</span>
+                <span className="text-gray-700"><strong>Access:</strong> Request a copy of the personal information we hold about you</span>
               </div>
               <div className="flex items-center p-3 bg-gray-50 rounded">
                 <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
@@ -184,11 +184,15 @@ const PrivacyPolicy = () => {
               </div>
               <div className="flex items-center p-3 bg-gray-50 rounded">
                 <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
-                <span className="text-gray-700"><strong>Deletion:</strong> Request deletion of your personal information</span>
+                <span className="text-gray-700"><strong>Deletion:</strong> Request deletion of your personal information, subject to our legal and professional record-keeping obligations</span>
               </div>
               <div className="flex items-center p-3 bg-gray-50 rounded">
                 <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
-                <span className="text-gray-700"><strong>Opt-out:</strong> Unsubscribe from marketing communications</span>
+                <span className="text-gray-700"><strong>Objection:</strong> Object to how we process your information</span>
+              </div>
+              <div className="flex items-center p-3 bg-gray-50 rounded">
+                <div className="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
+                <span className="text-gray-700"><strong>Complaint:</strong> Lodge a complaint with the Information Regulator of South Africa if you believe we have not handled your information properly</span>
               </div>
             </div>
           </section>
@@ -197,7 +201,7 @@ const PrivacyPolicy = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Contact Us</h2>
             <p className="text-gray-700 mb-6">
-              If you have any questions about this Privacy Policy or our privacy practices, please contact us:
+              If you have any questions about this Privacy Policy or how we handle your information, please contact us:
             </p>
             
             <div className="bg-blue-50 p-6 rounded-lg">

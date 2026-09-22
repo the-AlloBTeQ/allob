@@ -361,12 +361,12 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
               {/* Personal Information */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="first-name">
                     First Name *
                   </label>
                   <div className="relative">
                     <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                    <input
+                    <input id="first-name"
                       type="text"
                       name="firstName"
                       value={formData.firstName}
@@ -385,12 +385,12 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="last-name">
                     Last Name *
                   </label>
                   <div className="relative">
                     <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                    <input
+                    <input id="last-name"
                       type="text"
                       name="lastName"
                       value={formData.lastName}
@@ -412,12 +412,12 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
               {/* Contact Information */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="email-address">
                     Email Address *
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                    <input
+                    <input id="email-address"
                       type="email"
                       name="email"
                       value={formData.email}
@@ -436,12 +436,12 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="phone-number">
                     Phone Number *
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                    <input
+                    <input id="phone-number"
                       type="tel"
                       name="phone"
                       value={formData.phone}
@@ -462,12 +462,12 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
 
               {/* Company Information */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="company-name">
                   Company Name
                 </label>
                 <div className="relative">
                   <Building2 className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                  <input
+                  <input id="company-name"
                     type="text"
                     name="company"
                     value={formData.company}
@@ -486,10 +486,10 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
 
               {/* Consultation Type */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="consultation-type">
                   Consultation Type *
                 </label>
-                <select
+                <select id="consultation-type"
                   name="consultationType"
                   value={formData.consultationType}
                   onChange={handleInputChange}
@@ -508,12 +508,12 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
               {/* Meeting Details */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="preferred-date">
                     Preferred Date *
                   </label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                    <input
+                    <input id="preferred-date"
                       type="date"
                       name="preferredDate"
                       value={formData.preferredDate}
@@ -526,12 +526,12 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="preferred-time">
                     Preferred Time *
                   </label>
                   <div className="relative">
                     <Clock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                    <select
+                    <select id="preferred-time"
                       name="preferredTime"
                       value={formData.preferredTime}
                       onChange={handleInputChange}
@@ -550,10 +550,10 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
               </div>
 
               {/* Meeting Type */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div role="group" aria-labelledby="meeting-type-label">
+                <span id="meeting-type-label" className="block text-sm font-medium text-gray-700 mb-2">
                   Meeting Type *
-                </label>
+                </span>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50">
                     <input
@@ -607,12 +607,12 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
 
               {/* Business Description */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="business-description">
                   Business Description
                 </label>
                 <div className="relative">
                   <FileText className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                  <textarea
+                  <textarea id="business-description"
                     name="businessDescription"
                     value={formData.businessDescription}
                     onChange={handleInputChange}
@@ -625,12 +625,12 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
 
               {/* Specific Requirements */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="specific-requirements">
                   Specific Requirements
                 </label>
                 <div className="relative">
                   <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                  <textarea
+                  <textarea id="specific-requirements"
                     name="specificRequirements"
                     value={formData.specificRequirements}
                     onChange={handleInputChange}
@@ -643,10 +643,10 @@ const handleBookingMethod = (method: HandleBookingMethodParams['method']): void 
 
               {/* Priority */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="priority-level">
                   Priority Level
                 </label>
-                <select
+                <select id="priority-level"
                   name="urgency"
                   value={formData.urgency}
                   onChange={handleInputChange}

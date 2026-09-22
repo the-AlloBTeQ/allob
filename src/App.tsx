@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import Layout from './components/layout'
 import { HelmetProvider } from 'react-helmet-async'
 import Home from './pages/Home'
@@ -43,7 +43,7 @@ const SiteMap = lazy(() => import('./pages/sitemap'))
 
 // Loading component for better UX
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gray-50">
+  <div role="status" aria-live="polite" className="min-h-screen flex items-center justify-center bg-gray-50">
     <div className="text-center">
       <div className="relative">
         <div className="w-16 h-16 border-4 border-blue-200 rounded-full animate-spin border-t-blue-600 mx-auto mb-4"></div>
@@ -84,6 +84,39 @@ const LazyLoadErrorFallback = ({ retry }: { retry: () => void }) => (
   </div>
 )
 
+// On a client-side navigation the DOM swaps under the user: nothing scrolls,
+// focus stays on the link they just left, and a screen reader says nothing.
+// Reset the scroll, hand focus to <main>, and announce the new page title.
+const RouteAnnouncer = () => {
+  const { pathname } = useLocation()
+  const [announcement, setAnnouncement] = useState('')
+  const isInitialRender = useRef(true)
+
+  useEffect(() => {
+    if (isInitialRender.current) {
+      isInitialRender.current = false
+      return
+    }
+
+    window.scrollTo(0, 0)
+
+    // Helmet writes the new <title> after this effect, so wait a tick before
+    // reading it, then move focus so Tab continues from the top of the page.
+    const timer = window.setTimeout(() => {
+      setAnnouncement(document.title)
+      document.getElementById('main-content')?.focus()
+    }, 100)
+
+    return () => window.clearTimeout(timer)
+  }, [pathname])
+
+  return (
+    <div aria-live="polite" aria-atomic="true" className="sr-only">
+      {announcement}
+    </div>
+  )
+}
+
 // Enhanced Suspense wrapper with error handling
 const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={<PageLoader />}>
@@ -95,6 +128,7 @@ function App() {
   return (
     <HelmetProvider>
     <Router>
+      <RouteAnnouncer />
       <Layout>
         <Routes>
           {/* Home page loads immediately - no lazy loading for better first paint */}

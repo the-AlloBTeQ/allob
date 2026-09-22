@@ -282,10 +282,10 @@ setFormData({
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="preferredContact" className="block text-sm font-medium text-gray-700 mb-2">
+                <div role="group" aria-labelledby="preferred-contact-label">
+                  <span id="preferred-contact-label" className="block text-sm font-medium text-gray-700 mb-2">
                     Preferred Contact Method
-                  </label>
+                  </span>
                   <div className="flex space-x-6">
                     <label className="flex items-center">
                       <input

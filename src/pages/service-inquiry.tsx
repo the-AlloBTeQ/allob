@@ -213,10 +213,10 @@ ${sanitizeInput(formData.fullName)}`);
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="full-name">
                   <User className="w-4 h-4 inline mr-1" /> Full Name *
                 </label>
-                <input
+                <input aria-invalid={!!errors.fullName} aria-describedby={errors.fullName ? 'fullName-error' : undefined} id="full-name"
                   type="text"
                   name="fullName"
                   value={formData.fullName}
@@ -224,14 +224,14 @@ ${sanitizeInput(formData.fullName)}`);
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.fullName ? 'border-red-400' : 'border-gray-300'}`}
                   placeholder="Your full name"
                 />
-                {errors.fullName && <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
+                {errors.fullName && <p id="fullName-error" role="alert" className="text-red-500 text-sm mt-1">{errors.fullName}</p>}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="email">
                   <Mail className="w-4 h-4 inline mr-1" /> Email *
                 </label>
-                <input
+                <input aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} id="email"
                   type="email"
                   name="email"
                   value={formData.email}
@@ -239,14 +239,14 @@ ${sanitizeInput(formData.fullName)}`);
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.email ? 'border-red-400' : 'border-gray-300'}`}
                   placeholder="you@company.com"
                 />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                {errors.email && <p id="email-error" role="alert" className="text-red-500 text-sm mt-1">{errors.email}</p>}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="phone">
                   <Phone className="w-4 h-4 inline mr-1" /> Phone
                 </label>
-                <input
+                <input id="phone"
                   type="tel"
                   name="phone"
                   value={formData.phone}
@@ -257,10 +257,10 @@ ${sanitizeInput(formData.fullName)}`);
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="business-name">
                   <Building2 className="w-4 h-4 inline mr-1" /> Business Name
                 </label>
-                <input
+                <input id="business-name"
                   type="text"
                   name="businessName"
                   value={formData.businessName}
@@ -271,10 +271,10 @@ ${sanitizeInput(formData.fullName)}`);
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="what-do-you-need-help-with">
                   <MessageSquare className="w-4 h-4 inline mr-1" /> What do you need help with? *
                 </label>
-                <textarea
+                <textarea aria-invalid={!!errors.message} aria-describedby={errors.message ? 'message-error' : undefined} id="what-do-you-need-help-with"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
@@ -282,7 +282,7 @@ ${sanitizeInput(formData.fullName)}`);
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.message ? 'border-red-400' : 'border-gray-300'}`}
                   placeholder={`Tell us a bit about your ${industryInfo.name.toLowerCase()} business and what you're looking for`}
                 />
-                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+                {errors.message && <p id="message-error" role="alert" className="text-red-500 text-sm mt-1">{errors.message}</p>}
               </div>
 
               <button

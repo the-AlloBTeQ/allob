@@ -77,6 +77,7 @@ export const EmailReportForm: React.FC<EmailReportFormProps> = ({
                     <div className="flex-1">
                         <input
                             type="email"
+                            aria-label="Email address to send the report to"
                             required
                             placeholder="Enter your email address"
                             className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"

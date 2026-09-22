@@ -651,10 +651,10 @@ Email: ${customerData.email}`);
               
               {/* Package Selector */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="selected-package">
                   Selected Package
                 </label>
-                <select
+                <select id="selected-package"
                   value={selectedPackage}
                   onChange={(e) => setSelectedPackage(e.target.value as PackageKey)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
@@ -725,10 +725,10 @@ Email: ${customerData.email}`);
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="business-name">
                       Business Name *
                     </label>
-                    <input
+                    <input aria-invalid={!!errors.businessName} aria-describedby={errors.businessName ? 'businessName-error' : undefined} id="business-name"
                       type="text"
                       name="businessName"
                       value={formData.businessName}
@@ -741,15 +741,15 @@ Email: ${customerData.email}`);
                       placeholder="Enter your business name"
                     />
                     {errors.businessName && (
-                      <p className="text-red-500 text-sm mt-1">{errors.businessName}</p>
+                      <p id="businessName-error" role="alert" className="text-red-500 text-sm mt-1">{errors.businessName}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="registration-number">
                       Registration Number
                     </label>
-                    <input
+                    <input id="registration-number"
                       type="text"
                       name="registrationNumber"
                       value={formData.registrationNumber}
@@ -762,10 +762,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="business-type">
                       Business Type *
                     </label>
-                    <select
+                    <select aria-invalid={!!errors.businessType} aria-describedby={errors.businessType ? 'businessType-error' : undefined} id="business-type"
                       name="businessType"
                       value={formData.businessType}
                       onChange={handleInputChange}
@@ -780,15 +780,15 @@ Email: ${customerData.email}`);
                       ))}
                     </select>
                     {errors.businessType && (
-                      <p className="text-red-500 text-sm mt-1">{errors.businessType}</p>
+                      <p id="businessType-error" role="alert" className="text-red-500 text-sm mt-1">{errors.businessType}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="industry">
                       Industry *
                     </label>
-                    <select
+                    <select aria-invalid={!!errors.industry} aria-describedby={errors.industry ? 'industry-error' : undefined} id="industry"
                       name="industry"
                       value={formData.industry}
                       onChange={handleInputChange}
@@ -803,15 +803,15 @@ Email: ${customerData.email}`);
                       ))}
                     </select>
                     {errors.industry && (
-                      <p className="text-red-500 text-sm mt-1">{errors.industry}</p>
+                      <p id="industry-error" role="alert" className="text-red-500 text-sm mt-1">{errors.industry}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="years-in-business">
                       Years in Business
                     </label>
-                    <select
+                    <select id="years-in-business"
                       name="yearsInBusiness"
                       value={formData.yearsInBusiness}
                       onChange={handleInputChange}
@@ -828,10 +828,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="number-of-employees">
                       Number of Employees
                     </label>
-                    <select
+                    <select id="number-of-employees"
                       name="employees"
                       value={formData.employees}
                       onChange={handleInputChange}
@@ -859,10 +859,10 @@ Email: ${customerData.email}`);
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="contact-person">
                       Contact Person *
                     </label>
-                    <input
+                    <input aria-invalid={!!errors.contactPerson} aria-describedby={errors.contactPerson ? 'contactPerson-error' : undefined} id="contact-person"
                       type="text"
                       name="contactPerson"
                       value={formData.contactPerson}
@@ -875,15 +875,15 @@ Email: ${customerData.email}`);
                       placeholder="Full name"
                     />
                     {errors.contactPerson && (
-                      <p className="text-red-500 text-sm mt-1">{errors.contactPerson}</p>
+                      <p id="contactPerson-error" role="alert" className="text-red-500 text-sm mt-1">{errors.contactPerson}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="email-address">
                       Email Address *
                     </label>
-                    <input
+                    <input aria-invalid={!!errors.email} aria-describedby={errors.email ? 'email-error' : undefined} id="email-address"
                       type="email"
                       name="email"
                       value={formData.email}
@@ -896,15 +896,15 @@ Email: ${customerData.email}`);
                       placeholder="your@email.com"
                     />
                     {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                      <p id="email-error" role="alert" className="text-red-500 text-sm mt-1">{errors.email}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="phone-number">
                       Phone Number *
                     </label>
-                    <input
+                    <input aria-invalid={!!errors.phone} aria-describedby={errors.phone ? 'phone-error' : undefined} id="phone-number"
                       type="tel"
                       name="phone"
                       value={formData.phone}
@@ -917,15 +917,15 @@ Email: ${customerData.email}`);
                       placeholder="+27 11 123 4567"
                     />
                     {errors.phone && (
-                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                      <p id="phone-error" role="alert" className="text-red-500 text-sm mt-1">{errors.phone}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="alternate-phone">
                       Alternate Phone
                     </label>
-                    <input
+                    <input id="alternate-phone"
                       type="tel"
                       name="alternatePhone"
                       value={formData.alternatePhone}
@@ -948,10 +948,10 @@ Email: ${customerData.email}`);
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="street-address">
                       Street Address
                     </label>
-                    <input
+                    <input id="street-address"
                       type="text"
                       name="streetAddress"
                       value={formData.streetAddress}
@@ -964,10 +964,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="city">
                       City *
                     </label>
-                    <input
+                    <input aria-invalid={!!errors.city} aria-describedby={errors.city ? 'city-error' : undefined} id="city"
                       type="text"
                       name="city"
                       value={formData.city}
@@ -980,15 +980,15 @@ Email: ${customerData.email}`);
                       placeholder="City"
                     />
                     {errors.city && (
-                      <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+                      <p id="city-error" role="alert" className="text-red-500 text-sm mt-1">{errors.city}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="province">
                       Province *
                     </label>
-                    <select
+                    <select aria-invalid={!!errors.province} aria-describedby={errors.province ? 'province-error' : undefined} id="province"
                       name="province"
                       value={formData.province}
                       onChange={handleInputChange}
@@ -1003,15 +1003,15 @@ Email: ${customerData.email}`);
                       ))}
                     </select>
                     {errors.province && (
-                      <p className="text-red-500 text-sm mt-1">{errors.province}</p>
+                      <p id="province-error" role="alert" className="text-red-500 text-sm mt-1">{errors.province}</p>
                     )}
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="postal-code">
                       Postal Code
                     </label>
-                    <input
+                    <input id="postal-code"
                       type="text"
                       name="postalCode"
                       value={formData.postalCode}
@@ -1033,10 +1033,10 @@ Email: ${customerData.email}`);
                 </h3>
                 
                 <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <div role="group" aria-labelledby="services-needed-label">
+                    <span id="services-needed-label" className="block text-sm font-medium text-gray-700 mb-3">
                       Which services are you most interested in? (Select all that apply)
-                    </label>
+                    </span>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       {serviceOptions.map(service => (
                         <label key={service} className="flex items-center">
@@ -1057,10 +1057,10 @@ Email: ${customerData.email}`);
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="monthly-turnover-optional">
                         Monthly Turnover (Optional)
                       </label>
-                      <select
+                      <select id="monthly-turnover-optional"
                         name="monthlyTurnover"
                         value={formData.monthlyTurnover}
                         onChange={handleInputChange}
@@ -1078,10 +1078,10 @@ Email: ${customerData.email}`);
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="how-urgently-do-you-need-these-services">
                         How urgently do you need these services?
                       </label>
-                      <select
+                      <select id="how-urgently-do-you-need-these-services"
                         name="urgency"
                         value={formData.urgency}
                         onChange={handleInputChange}
@@ -1098,10 +1098,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="do-you-currently-have-an-accountant">
                       Do you currently have an accountant?
                     </label>
-                    <select
+                    <select id="do-you-currently-have-an-accountant"
                       name="currentAccountant"
                       value={formData.currentAccountant}
                       onChange={handleInputChange}
@@ -1117,10 +1117,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="additional-requirements-or-comments">
                       Additional Requirements or Comments
                     </label>
-                    <textarea
+                    <textarea id="additional-requirements-or-comments"
                       name="additionalRequirements"
                       value={formData.additionalRequirements}
                       onChange={handleInputChange}
@@ -1146,10 +1146,10 @@ Email: ${customerData.email}`);
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="preferred-contact-time">
                       Preferred Contact Time
                     </label>
-                    <select
+                    <select id="preferred-contact-time"
                       name="preferredContactTime"
                       value={formData.preferredContactTime}
                       onChange={handleInputChange}
@@ -1164,10 +1164,10 @@ Email: ${customerData.email}`);
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="how-did-you-hear-about-us">
                       How did you hear about us?
                     </label>
-                    <select
+                    <select id="how-did-you-hear-about-us"
                       name="referralSource"
                       value={formData.referralSource}
                       onChange={handleInputChange}

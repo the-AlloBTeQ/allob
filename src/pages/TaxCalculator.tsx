@@ -393,7 +393,7 @@ tr:last-child td{background:#eff6ff;font-weight:600}
 <div class="section">
   <div class="section-title">🧾 Deductions Summary</div>
   <table>
-    <thead><tr><th>Deduction</th><th>Annual Amount</th><th>Notes</th></tr></thead>
+    <thead><tr><th scope="col">Deduction</th><th scope="col">Annual Amount</th><th scope="col">Notes</th></tr></thead>
     <tbody>
       <tr><td>Retirement Contributions (Pension/Provident/RA)</td><td>${formatCurrency(results.deductions.pensionContributions)}</td><td>Capped at 27.5% or R350,000</td></tr>
       <tr><td>Medical Aid Tax Credit</td><td>${formatCurrency(results._medicalCredit || 0)}</td><td>${medicalAid.numberOfDependents} dependent(s) — R${MEDICAL_CREDITS.mainMember}/mth main + R${MEDICAL_CREDITS.firstDependent}/R${MEDICAL_CREDITS.additionalDependent} deps</td></tr>
@@ -680,16 +680,16 @@ const TaxCalculator = () => {
                             <h3 className="text-lg font-semibold mb-4 text-gray-900">Personal Information</h3>
                             <div className="grid md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                                    <input type="text" value={name} onChange={e => setName(e.target.value)} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Enter your first name" />
+                                    <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="first-name">First Name</label>
+                                    <input id="first-name" type="text" value={name} onChange={e => setName(e.target.value)} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Enter your first name" />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Surname</label>
-                                    <input type="text" value={surname} onChange={e => setSurname(e.target.value)} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Enter your surname" />
+                                    <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="surname">Surname</label>
+                                    <input id="surname" type="text" value={surname} onChange={e => setSurname(e.target.value)} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Enter your surname" />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Year of Assessment</label>
-                                    <select value={selectedYear} onChange={e => setYear(Number(e.target.value))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="year-of-assessment">Year of Assessment</label>
+                                    <select id="year-of-assessment" value={selectedYear} onChange={e => setYear(Number(e.target.value))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
                                         <option value="2022">2022</option>
                                         <option value="2023">2023</option>
                                         <option value="2024">2024</option>
@@ -699,8 +699,8 @@ const TaxCalculator = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
-                                    <input type="number" value={age} onChange={e => setAge(Number(e.target.value))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" min="18" max="100" />
+                                    <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="age">Age</label>
+                                    <input id="age" type="number" value={age} onChange={e => setAge(Number(e.target.value))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500" min="18" max="100" />
                                     <p className="text-xs text-gray-400 mt-1">Secondary rebate at 65+, tertiary at 75+</p>
                                 </div>
                             </div>
@@ -719,24 +719,24 @@ const TaxCalculator = () => {
                                     <h4 className="font-medium text-gray-700 mb-4">{index === 0 ? 'Primary Employer' : `Employer ${index + 1}`}</h4>
                                     <div className="grid md:grid-cols-2 gap-4 mb-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">Employer Name</label>
-                                            <input type="text" value={employer.name} onChange={e => handleEmployerChange(index, 'name', e.target.value)} disabled={isCalculating} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100" placeholder="Enter employer name" />
+                                            <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor={`employer-${index}-name`}>Employer Name</label>
+                                            <input id={`employer-${index}-name`} type="text" value={employer.name} onChange={e => handleEmployerChange(index, 'name', e.target.value)} disabled={isCalculating} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100" placeholder="Enter employer name" />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">Income Amount</label>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor={`employer-${index}-income`}>Income Amount</label>
                                             <div className="flex gap-2">
-                                                <input type="number" value={employer.income.amount || ''} onChange={e => handleEmployerChange(index, 'income', { amount: Number(e.target.value) })} disabled={isCalculating} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100" placeholder="Amount" min="0" />
-                                                <select value={employer.income.frequency} onChange={e => handleEmployerChange(index, 'income', { frequency: e.target.value as FrequencyType })} disabled={isCalculating} className="p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100">
+                                                <input id={`employer-${index}-income`} type="number" value={employer.income.amount || ''} onChange={e => handleEmployerChange(index, 'income', { amount: Number(e.target.value) })} disabled={isCalculating} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100" placeholder="Amount" min="0" />
+                                                <select aria-label="Income frequency" value={employer.income.frequency} onChange={e => handleEmployerChange(index, 'income', { frequency: e.target.value as FrequencyType })} disabled={isCalculating} className="p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100">
                                                     <option value="monthly">Monthly</option><option value="annual">Annual</option>
                                                     <option value="weekly">Weekly</option><option value="once-off">Once-off</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">Pension Fund Contribution</label>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor={`employer-${index}-pension`}>Pension Fund Contribution</label>
                                             <div className="flex gap-2">
-                                                <input type="number" value={employer.pensionContribution.amount || ''} onChange={e => handleEmployerChange(index, 'pensionContribution', { amount: Number(e.target.value) })} disabled={isCalculating} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100" placeholder="Amount" min="0" />
-                                                <select value={employer.pensionContribution.frequency} onChange={e => handleEmployerChange(index, 'pensionContribution', { frequency: e.target.value as FrequencyType })} disabled={isCalculating} className="p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100">
+                                                <input id={`employer-${index}-pension`} type="number" value={employer.pensionContribution.amount || ''} onChange={e => handleEmployerChange(index, 'pensionContribution', { amount: Number(e.target.value) })} disabled={isCalculating} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100" placeholder="Amount" min="0" />
+                                                <select aria-label="Pension fund contribution frequency" value={employer.pensionContribution.frequency} onChange={e => handleEmployerChange(index, 'pensionContribution', { frequency: e.target.value as FrequencyType })} disabled={isCalculating} className="p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100">
                                                     <option value="monthly">Monthly</option><option value="annual">Annual</option>
                                                     <option value="weekly">Weekly</option><option value="once-off">Once-off</option>
                                                 </select>
@@ -769,12 +769,12 @@ const TaxCalculator = () => {
                             >
                                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Monthly Contribution (Total)</label>
-                                        <input type="number" value={medicalAid.monthlyContribution || ''} onChange={e => setMedicalAid(m => ({ ...m, monthlyContribution: Number(e.target.value) }))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500" placeholder="e.g. 3500" min="0" />
+                                        <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="monthly-contribution-total">Monthly Contribution (Total)</label>
+                                        <input id="monthly-contribution-total" type="number" value={medicalAid.monthlyContribution || ''} onChange={e => setMedicalAid(m => ({ ...m, monthlyContribution: Number(e.target.value) }))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500" placeholder="e.g. 3500" min="0" />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Number of Dependents</label>
-                                        <input type="number" value={medicalAid.numberOfDependents} onChange={e => setMedicalAid(m => ({ ...m, numberOfDependents: Number(e.target.value) }))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500" min="0" max="20" />
+                                        <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="number-of-dependents">Number of Dependents</label>
+                                        <input id="number-of-dependents" type="number" value={medicalAid.numberOfDependents} onChange={e => setMedicalAid(m => ({ ...m, numberOfDependents: Number(e.target.value) }))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500" min="0" max="20" />
                                         <p className="text-xs text-gray-400 mt-1">Spouse + children on your plan</p>
                                     </div>
                                 </div>
@@ -810,19 +810,19 @@ const TaxCalculator = () => {
                                     <p className="text-xs text-gray-400 mb-3">Combined limit (Pension + Provident + RA): 27.5% of income or R350,000/year, whichever is lower</p>
                                     <div className="grid md:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">Provident Fund</label>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="provident-fund">Provident Fund</label>
                                             <div className="flex gap-2">
-                                                <input type="number" value={otherDeductions.providentFundAmount || ''} onChange={e => updateOther({ providentFundAmount: Number(e.target.value) })} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Amount" min="0" />
-                                                <select value={otherDeductions.providentFundFrequency} onChange={e => updateOther({ providentFundFrequency: e.target.value as FrequencyType })} className="p-3 border rounded-lg focus:ring-2 focus:ring-purple-500">
+                                                <input id="provident-fund" type="number" value={otherDeductions.providentFundAmount || ''} onChange={e => updateOther({ providentFundAmount: Number(e.target.value) })} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Amount" min="0" />
+                                                <select aria-label="Provident fund contribution frequency" value={otherDeductions.providentFundFrequency} onChange={e => updateOther({ providentFundFrequency: e.target.value as FrequencyType })} className="p-3 border rounded-lg focus:ring-2 focus:ring-purple-500">
                                                     <option value="monthly">Monthly</option><option value="annual">Annual</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">Retirement Annuity (RA)</label>
+                                            <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="retirement-annuity">Retirement Annuity (RA)</label>
                                             <div className="flex gap-2">
-                                                <input type="number" value={otherDeductions.retirementAnnuityAmount || ''} onChange={e => updateOther({ retirementAnnuityAmount: Number(e.target.value) })} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Amount" min="0" />
-                                                <select value={otherDeductions.retirementAnnuityFrequency} onChange={e => updateOther({ retirementAnnuityFrequency: e.target.value as FrequencyType })} className="p-3 border rounded-lg focus:ring-2 focus:ring-purple-500">
+                                                <input id="retirement-annuity" type="number" value={otherDeductions.retirementAnnuityAmount || ''} onChange={e => updateOther({ retirementAnnuityAmount: Number(e.target.value) })} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Amount" min="0" />
+                                                <select aria-label="Retirement annuity contribution frequency" value={otherDeductions.retirementAnnuityFrequency} onChange={e => updateOther({ retirementAnnuityFrequency: e.target.value as FrequencyType })} className="p-3 border rounded-lg focus:ring-2 focus:ring-purple-500">
                                                     <option value="monthly">Monthly</option><option value="annual">Annual</option>
                                                 </select>
                                             </div>
@@ -834,10 +834,10 @@ const TaxCalculator = () => {
                                 <div className="mb-6 pb-6 border-b border-gray-100">
                                     <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Insurance Premiums</p>
                                     <div className="max-w-sm">
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Income Protection Insurance</label>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="income-protection">Income Protection Insurance</label>
                                         <div className="flex gap-2">
-                                            <input type="number" value={otherDeductions.incomeProtectionAmount || ''} onChange={e => updateOther({ incomeProtectionAmount: Number(e.target.value) })} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Amount" min="0" />
-                                            <select value={otherDeductions.incomeProtectionFrequency} onChange={e => updateOther({ incomeProtectionFrequency: e.target.value as FrequencyType })} className="p-3 border rounded-lg focus:ring-2 focus:ring-purple-500">
+                                            <input id="income-protection" type="number" value={otherDeductions.incomeProtectionAmount || ''} onChange={e => updateOther({ incomeProtectionAmount: Number(e.target.value) })} className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="Amount" min="0" />
+                                            <select aria-label="Income protection premium frequency" value={otherDeductions.incomeProtectionFrequency} onChange={e => updateOther({ incomeProtectionFrequency: e.target.value as FrequencyType })} className="p-3 border rounded-lg focus:ring-2 focus:ring-purple-500">
                                                 <option value="monthly">Monthly</option><option value="annual">Annual</option>
                                             </select>
                                         </div>
@@ -849,8 +849,8 @@ const TaxCalculator = () => {
                                 <div className="mb-6 pb-6 border-b border-gray-100">
                                     <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Charitable Donations (Section 18A)</p>
                                     <div className="max-w-xs">
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Annual Donations to Approved PBOs</label>
-                                        <input type="number" value={otherDeductions.donationsAmount || ''} onChange={e => updateOther({ donationsAmount: Number(e.target.value) })} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="e.g. 5000" min="0" />
+                                        <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="annual-donations-to-approved-pbos">Annual Donations to Approved PBOs</label>
+                                        <input id="annual-donations-to-approved-pbos" type="number" value={otherDeductions.donationsAmount || ''} onChange={e => updateOther({ donationsAmount: Number(e.target.value) })} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="e.g. 5000" min="0" />
                                         <p className="text-xs text-gray-400 mt-1">Capped at 10% of taxable income. Valid Section 18A certificate required.</p>
                                     </div>
                                 </div>
@@ -860,12 +860,12 @@ const TaxCalculator = () => {
                                     <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Travel Allowance</p>
                                     <div className="grid md:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">Annual Travel Allowance (from employer)</label>
-                                            <input type="number" value={otherDeductions.travelAllowanceAnnual || ''} onChange={e => updateOther({ travelAllowanceAnnual: Number(e.target.value) })} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="e.g. 60000" min="0" />
+                                            <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="annual-travel-allowance-from-employer">Annual Travel Allowance (from employer)</label>
+                                            <input id="annual-travel-allowance-from-employer" type="number" value={otherDeductions.travelAllowanceAnnual || ''} onChange={e => updateOther({ travelAllowanceAnnual: Number(e.target.value) })} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="e.g. 60000" min="0" />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">Business Travel (km/year — logbook)</label>
-                                            <input type="number" value={otherDeductions.businessTravelKm || ''} onChange={e => updateOther({ businessTravelKm: Number(e.target.value) })} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="e.g. 15000" min="0" />
+                                            <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="business-travel-km-year-logbook">Business Travel (km/year — logbook)</label>
+                                            <input id="business-travel-km-year-logbook" type="number" value={otherDeductions.businessTravelKm || ''} onChange={e => updateOther({ businessTravelKm: Number(e.target.value) })} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500" placeholder="e.g. 15000" min="0" />
                                             <p className="text-xs text-gray-400 mt-1">SARS-compliant logbook required</p>
                                         </div>
                                     </div>
@@ -995,12 +995,12 @@ const TaxCalculator = () => {
                                         <h3 className="text-xl font-bold text-gray-900 mb-4">PAYE Comparison</h3>
                                         <div className="grid md:grid-cols-2 gap-4 mb-4">
                                             <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-1">Your Current PAYE Amount</label>
-                                                <input type="number" value={actualPAYE} onChange={e => setActualPAYE(Number(e.target.value))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Enter PAYE amount" min="0" />
+                                                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="your-current-paye-amount">Your Current PAYE Amount</label>
+                                                <input id="your-current-paye-amount" type="number" value={actualPAYE} onChange={e => setActualPAYE(Number(e.target.value))} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Enter PAYE amount" min="0" />
                                             </div>
                                             <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-1">Payment Frequency</label>
-                                                <select value={payeFrequency} onChange={e => setPayeFrequency(e.target.value as FrequencyType)} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500">
+                                                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="payment-frequency">Payment Frequency</label>
+                                                <select id="payment-frequency" value={payeFrequency} onChange={e => setPayeFrequency(e.target.value as FrequencyType)} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500">
                                                     <option value="monthly">Monthly</option><option value="weekly">Weekly</option><option value="annual">Annual</option>
                                                 </select>
                                             </div>

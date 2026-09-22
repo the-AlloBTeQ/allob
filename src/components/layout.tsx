@@ -30,21 +30,28 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className="min-h-screen bg-white">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+
       {/* Navigation */}
-      <nav className="bg-white shadow-lg fixed w-full z-50">
+      <nav className="bg-white shadow-lg fixed w-full z-50" aria-label="Main">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex-shrink-0 flex items-center group">
                 <img 
                   src="/logo.png" 
-                  alt="AlloB Consultants Logo" 
+                  alt="" 
                   className="h-10 w-auto mr-2"
                 />
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                  <span className="block text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
                     AlloB Consultants
-                  </h1>
+                  </span>
                   <span className="text-sm text-gray-600 italic font-medium">
                     Integrity and Innovation
                   </span>
@@ -57,6 +64,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <Link
                   key={item.name}
                   to={item.path}
+                  aria-current={isActive(item.path) ? 'page' : undefined}
                   className={`font-medium transition-colors ${
                     isActive(item.path)
                       ? 'text-blue-600 border-b-2 border-blue-600'
@@ -78,9 +86,11 @@ const Layout = ({ children }: LayoutProps) => {
               <button 
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="p-2"
-                aria-label="Toggle menu"
+                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-menu"
               >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
               </button>
             </div>
           </div>
@@ -88,12 +98,13 @@ const Layout = ({ children }: LayoutProps) => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t shadow-lg">
+          <div id="mobile-menu" className="md:hidden bg-white border-t shadow-lg">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
+                  aria-current={isActive(item.path) ? 'page' : undefined}
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-3 py-2 rounded-md transition-colors ${
                     isActive(item.path)
@@ -110,7 +121,7 @@ const Layout = ({ children }: LayoutProps) => {
       </nav>
 
       {/* Main Content */}
-      <main className="pt-16">
+      <main id="main-content" tabIndex={-1} className="pt-16 focus:outline-none">
         {children}
       </main>
 
