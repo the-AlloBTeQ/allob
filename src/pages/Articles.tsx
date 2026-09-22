@@ -89,6 +89,66 @@ const articlesData = [
     excerpt: 'Fulfill your UIF compliance obligations and protect your employees with our comprehensive guide for SME employers.',
     image: 'https://placehold.co/400x300/8b5cf6/ffffff?text=UIF+Compliance',
     featured: true
+  },
+  {
+    id: 8,
+    title: 'Approved but Not Yet Effective: The GRAP Standards Every Municipality Must Prepare For',
+    author: 'AlloB Consultants Technical Department',
+    date: '2026-09-22',
+    readTime: '8 min read',
+    category: 'public-sector',
+    tags: ['GRAP', 'Public Sector', 'Municipalities', 'Accounting Standards Board'],
+    excerpt: 'A new cluster of Standards of GRAP has cleared the Accounting Standards Board and is waiting only for the Minister of Finance to gazette an effective date. Here is what has been approved and why the preparation work needs to start now.',
+    image: 'https://placehold.co/400x300/0B2A4A/ffffff?text=GRAP+Watch',
+    featured: true
+  },
+  {
+    id: 9,
+    title: 'GRAP 105, 106 & 107 Revised: Getting Ready for the New Rules on Transfers of Functions and Mergers',
+    author: 'AlloB Consultants Technical Department',
+    date: '2026-09-22',
+    readTime: '10 min read',
+    category: 'public-sector',
+    tags: ['GRAP', 'GRAP 105', 'GRAP 106', 'GRAP 107', 'Municipalities'],
+    excerpt: 'Revised GRAP 105, 106 and 107 replace the 2010 originals with a single, consistent model for deciding whether a restructuring is a transfer of functions or a merger.',
+    image: 'https://placehold.co/400x300/0B2A4A/ffffff?text=GRAP+105-107',
+    featured: false
+  },
+  {
+    id: 10,
+    title: 'GRAP 111 Explained: Accounting for Social Benefits for the First Time',
+    author: 'AlloB Consultants Technical Department',
+    date: '2026-09-22',
+    readTime: '11 min read',
+    category: 'public-sector',
+    tags: ['GRAP', 'GRAP 111', 'Social Benefits', 'Indigent Support', 'Municipalities'],
+    excerpt: 'GRAP 111 is a wholly new Standard for cash social benefits. The recognition point runs against most preparers\' first instinct - and getting it wrong changes the size of the liability.',
+    image: 'https://placehold.co/400x300/0B2A4A/ffffff?text=GRAP+111',
+    featured: true
+  },
+  {
+    id: 11,
+    title: 'GRAP 109 Amended: Why the Sharpened "Binding Arrangement" Test Changes How You Account for Agency Income',
+    author: 'AlloB Consultants Technical Department',
+    date: '2026-09-22',
+    readTime: '9 min read',
+    category: 'public-sector',
+    tags: ['GRAP', 'GRAP 109', 'Principal and Agent', 'Conditional Grants', 'Municipalities'],
+    excerpt: 'If your municipality collects money, manages funds, or delivers a programme on behalf of another sphere of government, GRAP 109 already governs how you account for it - and the 2026 amendments sharpen the test.',
+    image: 'https://placehold.co/400x300/0B2A4A/ffffff?text=GRAP+109',
+    featured: false
+  },
+  {
+    id: 12,
+    title: "The Changes That Aren't So Quiet: GRAP 1, GRAP 103 and the Improvements to the Standards of GRAP (2026)",
+    author: 'AlloB Consultants Technical Department',
+    date: '2026-09-22',
+    readTime: '10 min read',
+    category: 'public-sector',
+    tags: ['GRAP', 'GRAP 1', 'GRAP 103', 'Going Concern', 'Heritage Assets'],
+    excerpt: 'Not every approved-but-not-yet-effective change comes as a headline new Standard. Going concern disclosure, loan covenant classification, and heritage asset reclassification all get quietly rewritten.',
+    image: 'https://placehold.co/400x300/0B2A4A/ffffff?text=GRAP+1-103',
+    featured: false
   }
 ];
 
@@ -107,7 +167,8 @@ const Articles: React.FC = () => {
     { value: 'tax', label: 'Tax Advisory' },
     { value: 'accounting', label: 'Accounting' },
     { value: 'business', label: 'Business Advisory' },
-    { value: 'industry', label: 'Industry Insights' }
+    { value: 'industry', label: 'Industry Insights' },
+    { value: 'public-sector', label: 'Public Sector / GRAP' }
   ];
 
   // Filter and sort articles
