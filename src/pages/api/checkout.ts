@@ -1,5 +1,6 @@
 // pages/api/checkout.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { escapeHtml as esc } from '../../lib/validation';
 
 // Type definitions
 interface CheckoutData {
@@ -248,7 +249,7 @@ const sendSalesNotificationEmail = async (data: CheckoutData): Promise<boolean> 
     const emailContent = {
       from: sender,
       to: [{ email: 'sales@allob.co.za' }],
-      subject: `🚨 New Service Request: ${data.package.name} - ${data.customerData.businessName}`,
+      subject: `🚨 New Service Request: ${esc(data.package.name)} - ${esc(data.customerData.businessName)}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -277,67 +278,67 @@ const sendSalesNotificationEmail = async (data: CheckoutData): Promise<boolean> 
             <div class="content">
                 <div class="highlight ${data.customerData.urgency === 'immediate' ? 'urgent' : ''}">
                     <h2>📋 Quick Summary</h2>
-                    <p><strong>${data.customerData.contactPerson}</strong> from <strong>${data.customerData.businessName}</strong> is interested in <strong>${data.package.name}</strong></p>
-                    <p>📧 ${data.customerData.email} | 📞 ${data.customerData.phone}</p>
-                    <p>🏢 ${data.customerData.industry} | 💰 ${data.customerData.monthlyTurnover || 'Not disclosed'}</p>
+                    <p><strong>${esc(data.customerData.contactPerson)}</strong> from <strong>${esc(data.customerData.businessName)}</strong> is interested in <strong>${esc(data.package.name)}</strong></p>
+                    <p>📧 ${esc(data.customerData.email)} | 📞 ${esc(data.customerData.phone)}</p>
+                    <p>🏢 ${esc(data.customerData.industry)} | 💰 ${esc(data.customerData.monthlyTurnover) || 'Not disclosed'}</p>
                 </div>
 
                 <div class="section">
                     <h3>📦 Package Details</h3>
                     <table>
-                        <tr><th>Package</th><td>${data.package.name}</td></tr>
-                        <tr><th>Price</th><td>${data.package.price}</td></tr>
-                        <tr><th>Description</th><td>${data.package.description}</td></tr>
-                        <tr><th>Features</th><td>${data.package.features.join(', ')}</td></tr>
+                        <tr><th>Package</th><td>${esc(data.package.name)}</td></tr>
+                        <tr><th>Price</th><td>${esc(data.package.price)}</td></tr>
+                        <tr><th>Description</th><td>${esc(data.package.description)}</td></tr>
+                        <tr><th>Features</th><td>${data.package.features.map(esc).join(', ')}</td></tr>
                     </table>
                 </div>
 
                 <div class="section">
                     <h3>🏢 Business Information</h3>
                     <table>
-                        <tr><th>Business Name</th><td>${data.customerData.businessName}</td></tr>
-                        <tr><th>Registration Number</th><td>${data.customerData.registrationNumber || 'Not provided'}</td></tr>
-                        <tr><th>Business Type</th><td>${data.customerData.businessType}</td></tr>
-                        <tr><th>Industry</th><td>${data.customerData.industry}</td></tr>
-                        <tr><th>Years in Business</th><td>${data.customerData.yearsInBusiness || 'Not specified'}</td></tr>
-                        <tr><th>Number of Employees</th><td>${data.customerData.employees || 'Not specified'}</td></tr>
+                        <tr><th>Business Name</th><td>${esc(data.customerData.businessName)}</td></tr>
+                        <tr><th>Registration Number</th><td>${esc(data.customerData.registrationNumber) || 'Not provided'}</td></tr>
+                        <tr><th>Business Type</th><td>${esc(data.customerData.businessType)}</td></tr>
+                        <tr><th>Industry</th><td>${esc(data.customerData.industry)}</td></tr>
+                        <tr><th>Years in Business</th><td>${esc(data.customerData.yearsInBusiness) || 'Not specified'}</td></tr>
+                        <tr><th>Number of Employees</th><td>${esc(data.customerData.employees) || 'Not specified'}</td></tr>
                     </table>
                 </div>
 
                 <div class="section">
                     <h3>👤 Contact Information</h3>
                     <table>
-                        <tr><th>Contact Person</th><td>${data.customerData.contactPerson}</td></tr>
-                        <tr><th>Email</th><td><a href="mailto:${data.customerData.email}">${data.customerData.email}</a></td></tr>
-                        <tr><th>Phone</th><td><a href="tel:${data.customerData.phone}">${data.customerData.phone}</a></td></tr>
-                        <tr><th>Alternate Phone</th><td>${data.customerData.alternatePhone || 'Not provided'}</td></tr>
+                        <tr><th>Contact Person</th><td>${esc(data.customerData.contactPerson)}</td></tr>
+                        <tr><th>Email</th><td><a href="mailto:${esc(data.customerData.email)}">${esc(data.customerData.email)}</a></td></tr>
+                        <tr><th>Phone</th><td><a href="tel:${esc(data.customerData.phone)}">${esc(data.customerData.phone)}</a></td></tr>
+                        <tr><th>Alternate Phone</th><td>${esc(data.customerData.alternatePhone) || 'Not provided'}</td></tr>
                     </table>
                 </div>
 
                 <div class="section">
                     <h3>📍 Address</h3>
                     <p>
-                        ${data.customerData.streetAddress || 'Not provided'}<br>
-                        ${data.customerData.city}, ${data.customerData.province}<br>
-                        ${data.customerData.postalCode || 'No postal code'}
+                        ${esc(data.customerData.streetAddress) || 'Not provided'}<br>
+                        ${esc(data.customerData.city)}, ${esc(data.customerData.province)}<br>
+                        ${esc(data.customerData.postalCode) || 'No postal code'}
                     </p>
                 </div>
 
                 <div class="section">
                     <h3>🎯 Service Requirements</h3>
                     <table>
-                        <tr><th>Services Needed</th><td>${data.customerData.servicesNeeded.join(', ') || 'Not specified'}</td></tr>
-                        <tr><th>Urgency</th><td><strong>${data.customerData.urgency || 'Not specified'}</strong></td></tr>
-                        <tr><th>Monthly Turnover</th><td>${data.customerData.monthlyTurnover || 'Not disclosed'}</td></tr>
-                        <tr><th>Current Accountant</th><td>${data.customerData.currentAccountant || 'Not specified'}</td></tr>
+                        <tr><th>Services Needed</th><td>${data.customerData.servicesNeeded.map(esc).join(', ') || 'Not specified'}</td></tr>
+                        <tr><th>Urgency</th><td><strong>${esc(data.customerData.urgency) || 'Not specified'}</strong></td></tr>
+                        <tr><th>Monthly Turnover</th><td>${esc(data.customerData.monthlyTurnover) || 'Not disclosed'}</td></tr>
+                        <tr><th>Current Accountant</th><td>${esc(data.customerData.currentAccountant) || 'Not specified'}</td></tr>
                     </table>
                 </div>
 
                 <div class="section">
                     <h3>📞 Contact Preferences</h3>
                     <table>
-                        <tr><th>Preferred Contact Time</th><td>${data.customerData.preferredContactTime || 'Any time'}</td></tr>
-                        <tr><th>How they heard about us</th><td>${data.customerData.referralSource || 'Not specified'}</td></tr>
+                        <tr><th>Preferred Contact Time</th><td>${esc(data.customerData.preferredContactTime) || 'Any time'}</td></tr>
+                        <tr><th>How they heard about us</th><td>${esc(data.customerData.referralSource) || 'Not specified'}</td></tr>
                     </table>
                 </div>
 
@@ -345,7 +346,7 @@ const sendSalesNotificationEmail = async (data: CheckoutData): Promise<boolean> 
                 <div class="section">
                     <h3>📝 Additional Requirements</h3>
                     <div class="highlight">
-                        <p>${data.customerData.additionalRequirements}</p>
+                        <p>${esc(data.customerData.additionalRequirements)}</p>
                     </div>
                 </div>
                 ` : ''}
@@ -353,11 +354,11 @@ const sendSalesNotificationEmail = async (data: CheckoutData): Promise<boolean> 
                 <div class="highlight">
                     <h3>⚡ Action Required</h3>
                     <p><strong>Contact this prospect within 24 hours!</strong></p>
-                    <a href="mailto:${data.customerData.email}?subject=Re: Your ${data.package.name} Inquiry" class="cta">
-                        Email ${data.customerData.contactPerson}
+                    <a href="mailto:${esc(data.customerData.email)}?subject=Re: Your ${esc(data.package.name)} Inquiry" class="cta">
+                        Email ${esc(data.customerData.contactPerson)}
                     </a>
-                    <a href="tel:${data.customerData.phone}" class="cta">
-                        Call ${data.customerData.phone}
+                    <a href="tel:${esc(data.customerData.phone)}" class="cta">
+                        Call ${esc(data.customerData.phone)}
                     </a>
                 </div>
             </div>
@@ -365,7 +366,7 @@ const sendSalesNotificationEmail = async (data: CheckoutData): Promise<boolean> 
             <div class="footer">
                 <p><strong>Submission Details:</strong></p>
                 <p>📅 Submitted: ${new Date(data.timestamp).toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' })}</p>
-                <p>🌐 Source: ${data.source}</p>
+                <p>🌐 Source: ${esc(data.source)}</p>
                 <p>🆔 Reference: CHK_${Date.now()}</p>
             </div>
         </body>
@@ -400,7 +401,7 @@ const sendCustomerConfirmationEmail = async (data: CheckoutData): Promise<boolea
     const emailContent = {
       from: sender,
       to: [{ email: data.customerData.email }],
-      subject: `Thank you for your interest in ${data.package.name} - AlloB Consultants`,
+      subject: `Thank you for your interest in ${esc(data.package.name)} - AlloB Consultants`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -429,19 +430,19 @@ const sendCustomerConfirmationEmail = async (data: CheckoutData): Promise<boolea
             </div>
             
             <div class="content">
-                <p>Dear <strong>${data.customerData.contactPerson}</strong>,</p>
+                <p>Dear <strong>${esc(data.customerData.contactPerson)}</strong>,</p>
                 
-                <p>Thank you for your interest in our professional services. We have successfully received your request for our <strong>${data.package.name}</strong> and our sales team will contact you within 24 hours to discuss your specific requirements.</p>
+                <p>Thank you for your interest in our professional services. We have successfully received your request for our <strong>${esc(data.package.name)}</strong> and our sales team will contact you within 24 hours to discuss your specific requirements.</p>
                 
                 <div class="package-info">
                     <h3>📦 Your Selected Package</h3>
-                    <p><strong>Package:</strong> ${data.package.name}</p>
-                    <p><strong>Price:</strong> ${data.package.price}</p>
-                    <p><strong>Description:</strong> ${data.package.description}</p>
+                    <p><strong>Package:</strong> ${esc(data.package.name)}</p>
+                    <p><strong>Price:</strong> ${esc(data.package.price)}</p>
+                    <p><strong>Description:</strong> ${esc(data.package.description)}</p>
                     
                     <h4>Included Services:</h4>
                     <ul>
-                        ${data.package.features.map(feature => `<li>${feature}</li>`).join('')}
+                        ${data.package.features.map(feature => `<li>${esc(feature)}</li>`).join('')}
                     </ul>
                 </div>
                 
@@ -456,10 +457,10 @@ const sendCustomerConfirmationEmail = async (data: CheckoutData): Promise<boolea
                 
                 <div class="highlight">
                     <h3>📋 Your Request Summary</h3>
-                    <p><strong>Business:</strong> ${data.customerData.businessName}</p>
-                    <p><strong>Industry:</strong> ${data.customerData.industry}</p>
-                    <p><strong>Services of Interest:</strong> ${data.customerData.servicesNeeded.join(', ') || 'As per package'}</p>
-                    <p><strong>Urgency:</strong> ${data.customerData.urgency || 'Not specified'}</p>
+                    <p><strong>Business:</strong> ${esc(data.customerData.businessName)}</p>
+                    <p><strong>Industry:</strong> ${esc(data.customerData.industry)}</p>
+                    <p><strong>Services of Interest:</strong> ${data.customerData.servicesNeeded.map(esc).join(', ') || 'As per package'}</p>
+                    <p><strong>Urgency:</strong> ${esc(data.customerData.urgency) || 'Not specified'}</p>
                     <p><strong>Submitted:</strong> ${new Date(data.timestamp).toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' })}</p>
                 </div>
                 

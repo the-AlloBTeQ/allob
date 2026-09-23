@@ -114,7 +114,7 @@ const Grap105106107: React.FC = () => {
       <section className="mb-12 bg-amber-50 border border-amber-200 rounded-lg p-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
           <Building2 className="w-6 h-6 mr-2 text-amber-700" />
-          Worked example for a municipal reader
+          Worked example
         </h2>
         <p className="text-gray-800 text-sm mb-3">
           A district municipality hands the water services provider function to a local municipality:

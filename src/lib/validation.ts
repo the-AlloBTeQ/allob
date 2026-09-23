@@ -164,6 +164,22 @@ export const sanitizeString = (input: string): string => {
   return input.trim().replace(/[<>]/g, '');
 };
 
+// Escape a value for safe interpolation into raw HTML (e.g. email templates
+// built from string concatenation). Unlike sanitizeString above, this keeps
+// the original characters visible to the recipient instead of stripping
+// them, by turning them into their HTML entity equivalents - the standard
+// fix for HTML/attribute injection from user-supplied form fields such as
+// business name, contact person, phone, or free-text message fields.
+export const escapeHtml = (value: unknown): string => {
+  if (value === null || value === undefined) return '';
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+};
+
 // Validate environment variables
 export const validateEnvironment = (): void => {
   const required = ['MONGODB_URI'];

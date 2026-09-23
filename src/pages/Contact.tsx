@@ -37,7 +37,7 @@ Preferred Contact: ${formData.preferredContact}
 Message:
 ${formData.message}
   `.trim()
-const mailtoLink = `mailto:info@allob.co.za?subject=Contact Form - ${formData.service || 'General Inquiry'}&body=${encodeURIComponent(emailBody)}`
+const mailtoLink = `mailto:info@allob.co.za?subject=${encodeURIComponent(`Contact Form - ${formData.service || 'General Inquiry'}`)}&body=${encodeURIComponent(emailBody)}`
 window.location.href = mailtoLink
 
 setFormData({

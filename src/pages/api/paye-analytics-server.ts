@@ -624,11 +624,16 @@ app.get('/api/analytics/salary-ranges', async (req, res) => {
 app.get('/api/analytics/user-journey', async (req, res) => {
   try {
     const { sessionId } = req.query;
-    
-    if (!sessionId) {
+
+    // req.query values can be strings, arrays, or (via bracket notation like
+    // ?sessionId[$ne]=1) nested objects. Passing that straight into a Mongo
+    // filter lets an attacker send a query operator instead of a real id and
+    // match every session's data instead of just their own, so require a
+    // plain, bounded string before it ever reaches the database.
+    if (typeof sessionId !== 'string' || sessionId.length === 0 || sessionId.length > 100) {
       return res.status(400).json({
         success: false,
-        error: 'SessionId is required'
+        error: 'A valid sessionId string is required'
       });
     }
 

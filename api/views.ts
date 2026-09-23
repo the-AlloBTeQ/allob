@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Redis } from '@upstash/redis';
+import { setSecurityHeaders } from '../src/lib/cors';
 
 // Minimal, database-free view counter backed by Upstash Redis (installed via
 // the Vercel Marketplace "Redis" integration) — not the Mongo/Prisma stack
@@ -18,6 +19,9 @@ const isValidSlug = (slug: unknown): slug is string =>
   typeof slug === 'string' && slug.length > 0 && slug.length <= MAX_SLUG_LENGTH && /^[a-zA-Z0-9_-]+$/.test(slug);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Clickjacking / MIME-sniffing / CSP protection - previously defined in
+  // lib/cors.ts but never applied to any deployed response.
+  setSecurityHeaders(res);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');

@@ -1,5 +1,6 @@
 // lib/email.ts - Production Mailtrap Email Service
 import nodemailer from 'nodemailer';
+import { escapeHtml as esc } from './validation';
 import type { SendMailOptions } from 'nodemailer';
 import type { Transporter } from 'nodemailer';
 
@@ -89,7 +90,7 @@ const generateSalesEmailHTML = (data: CheckoutRequest): string => {
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>New Service Request - ${packageInfo.name}</title>
+      <title>New Service Request - ${esc(packageInfo.name)}</title>
       <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f8fafc; }
@@ -129,7 +130,7 @@ const generateSalesEmailHTML = (data: CheckoutRequest): string => {
       <div class="container">
         <div class="header">
           <h1>New Service Package Request</h1>
-          <p>A potential client has requested ${packageInfo.name}</p>
+          <p>A potential client has requested ${esc(packageInfo.name)}</p>
         </div>
         
         <div class="content">
@@ -143,9 +144,9 @@ const generateSalesEmailHTML = (data: CheckoutRequest): string => {
           
           <div class="section">
             <div class="package-highlight">
-              <h2 style="margin: 0 0 10px 0; color: #1e40af;">${packageInfo.name}</h2>
-              <p style="margin: 0 0 5px 0;"><strong>Price:</strong> ${packageInfo.price}</p>
-              <p style="margin: 0;">${packageInfo.description}</p>
+              <h2 style="margin: 0 0 10px 0; color: #1e40af;">${esc(packageInfo.name)}</h2>
+              <p style="margin: 0 0 5px 0;"><strong>Price:</strong> ${esc(packageInfo.price)}</p>
+              <p style="margin: 0;">${esc(packageInfo.description)}</p>
               ${packageInfo.popular ? '<div style="background: #fbbf24; color: #92400e; padding: 4px 12px; border-radius: 12px; font-size: 12px; display: inline-block; margin-top: 10px; font-weight: 600;">MOST POPULAR PACKAGE</div>' : ''}
             </div>
           </div>
@@ -155,20 +156,20 @@ const generateSalesEmailHTML = (data: CheckoutRequest): string => {
             <div class="info-grid">
               <div class="info-card priority-high">
                 <div class="info-label">Contact Person</div>
-                <div class="info-value">${customerData.contactPerson}</div>
+                <div class="info-value">${esc(customerData.contactPerson)}</div>
               </div>
               <div class="info-card priority-high">
                 <div class="info-label">Email Address</div>
-                <div class="info-value"><a href="mailto:${customerData.email}">${customerData.email}</a></div>
+                <div class="info-value"><a href="mailto:${esc(customerData.email)}">${esc(customerData.email)}</a></div>
               </div>
               <div class="info-card priority-high">
                 <div class="info-label">Primary Phone</div>
-                <div class="info-value"><a href="tel:${customerData.phone}">${customerData.phone}</a></div>
+                <div class="info-value"><a href="tel:${esc(customerData.phone)}">${esc(customerData.phone)}</a></div>
               </div>
               ${customerData.alternatePhone ? `
                 <div class="info-card priority-medium">
                   <div class="info-label">Alternate Phone</div>
-                  <div class="info-value"><a href="tel:${customerData.alternatePhone}">${customerData.alternatePhone}</a></div>
+                  <div class="info-value"><a href="tel:${esc(customerData.alternatePhone)}">${esc(customerData.alternatePhone)}</a></div>
                 </div>
               ` : ''}
             </div>
@@ -179,7 +180,7 @@ const generateSalesEmailHTML = (data: CheckoutRequest): string => {
             <div class="info-grid">
               <div class="info-card">
                 <div class="info-label">Business Name</div>
-                <div class="info-value">${customerData.businessName}</div>
+                <div class="info-value">${esc(customerData.businessName)}</div>
               </div>
               <div class="info-card">
                 <div class="info-label">Business Type</div>
@@ -196,13 +197,13 @@ const generateSalesEmailHTML = (data: CheckoutRequest): string => {
               ${customerData.employees ? `
                 <div class="info-card">
                   <div class="info-label">Employees</div>
-                  <div class="info-value">${customerData.employees}</div>
+                  <div class="info-value">${esc(customerData.employees)}</div>
                 </div>
               ` : ''}
               ${customerData.monthlyTurnover ? `
                 <div class="info-card">
                   <div class="info-label">Monthly Turnover</div>
-                  <div class="info-value">${customerData.monthlyTurnover}</div>
+                  <div class="info-value">${esc(customerData.monthlyTurnover)}</div>
                 </div>
               ` : ''}
             </div>
@@ -212,7 +213,7 @@ const generateSalesEmailHTML = (data: CheckoutRequest): string => {
             <div class="section">
               <h3>Services of Interest</h3>
               <div class="services-grid">
-                ${customerData.servicesNeeded.map((service: string) => `<div class="service-tag">${service}</div>`).join('')}
+                ${customerData.servicesNeeded.map((service: string) => `<div class="service-tag">${esc(service)}</div>`).join('')}
               </div>
             </div>
           ` : ''}
@@ -231,13 +232,13 @@ const generateSalesEmailHTML = (data: CheckoutRequest): string => {
               ${customerData.urgency ? `
                 <div class="info-card ${customerData.urgency === 'immediate' ? 'priority-high' : 'priority-medium'}">
                   <div class="info-label">Urgency Level</div>
-                  <div class="info-value">${customerData.urgency}</div>
+                  <div class="info-value">${esc(customerData.urgency)}</div>
                 </div>
               ` : ''}
               ${customerData.preferredContactTime ? `
                 <div class="info-card priority-medium">
                   <div class="info-label">Preferred Contact Time</div>
-                  <div class="info-value">${customerData.preferredContactTime}</div>
+                  <div class="info-value">${esc(customerData.preferredContactTime)}</div>
                 </div>
               ` : ''}
             </div>
@@ -247,15 +248,15 @@ const generateSalesEmailHTML = (data: CheckoutRequest): string => {
             <div class="section">
               <h3>Additional Requirements</h3>
               <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; border-left: 4px solid #6b7280;">
-                <p style="margin: 0;">${customerData.additionalRequirements}</p>
+                <p style="margin: 0;">${esc(customerData.additionalRequirements)}</p>
               </div>
             </div>
           ` : ''}
           
           <div class="cta-section">
             <h3 style="margin-bottom: 20px;">Quick Actions</h3>
-            <a href="mailto:${customerData.email}?subject=Re: ${packageInfo.name} Inquiry" class="cta-button">Reply to Customer</a>
-            <a href="tel:${customerData.phone}" class="cta-button" style="background: #059669;">Call Now</a>
+            <a href="mailto:${esc(customerData.email)}?subject=Re: ${esc(packageInfo.name)} Inquiry" class="cta-button">Reply to Customer</a>
+            <a href="tel:${esc(customerData.phone)}" class="cta-button" style="background: #059669;">Call Now</a>
           </div>
         </div>
         
@@ -306,25 +307,25 @@ const generateCustomerConfirmationHTML = (data: CheckoutRequest): string => {
     <body>
       <div class="container">
         <div class="header">
-          <h1>Thank You, ${customerData.contactPerson}!</h1>
-          <p>We've received your request for our ${packageInfo.name}</p>
+          <h1>Thank You, ${esc(customerData.contactPerson)}!</h1>
+          <p>We've received your request for our ${esc(packageInfo.name)}</p>
         </div>
         
         <div class="content">
-          <p>Dear ${customerData.contactPerson},</p>
+          <p>Dear ${esc(customerData.contactPerson)},</p>
           
-          <p style="margin: 20px 0;">Thank you for choosing <strong>AlloB Consultants</strong> for your business needs. We're excited to help ${customerData.businessName} achieve its financial and strategic goals.</p>
+          <p style="margin: 20px 0;">Thank you for choosing <strong>AlloB Consultants</strong> for your business needs. We're excited to help ${esc(customerData.businessName)} achieve its financial and strategic goals.</p>
           
           <div class="package-box">
             <h3 style="margin: 0 0 10px 0; color: #1e40af;">Your Selected Package</h3>
-            <h4 style="margin: 0 0 5px 0;">${packageInfo.name} - ${packageInfo.price}</h4>
-            <p style="margin: 0 0 15px 0;">${packageInfo.description}</p>
+            <h4 style="margin: 0 0 5px 0;">${esc(packageInfo.name)} - ${esc(packageInfo.price)}</h4>
+            <p style="margin: 0 0 15px 0;">${esc(packageInfo.description)}</p>
             ${packageInfo.popular ? '<div style="background: #fbbf24; color: #92400e; padding: 4px 12px; border-radius: 12px; font-size: 12px; display: inline-block; font-weight: 600;">MOST POPULAR CHOICE</div>' : ''}
             
             <div style="margin-top: 15px;">
               <h4 style="color: #374151; margin-bottom: 10px;">Included Services:</h4>
               <ul style="list-style: none; padding: 0;">
-                ${packageInfo.features.map((feature: string) => `<li style="margin: 5px 0; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: #10b981;">✓</span>${feature}</li>`).join('')}
+                ${packageInfo.features.map((feature: string) => `<li style="margin: 5px 0; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: #10b981;">✓</span>${esc(feature)}</li>`).join('')}
               </ul>
             </div>
           </div>
@@ -344,7 +345,7 @@ const generateCustomerConfirmationHTML = (data: CheckoutRequest): string => {
               <span class="step-number">2</span>
               <div style="display: inline-block;">
                 <strong>Custom Proposal & Pricing</strong><br>
-                We'll prepare a detailed proposal tailored to ${customerData.businessName}'s unique needs and budget.
+                We'll prepare a detailed proposal tailored to ${esc(customerData.businessName)}'s unique needs and budget.
               </div>
             </div>
             
@@ -384,7 +385,7 @@ const generateCustomerConfirmationHTML = (data: CheckoutRequest): string => {
             </ul>
           </div>
           
-          <p style="margin: 20px 0;">We look forward to partnering with ${customerData.businessName} and contributing to your continued success.</p>
+          <p style="margin: 20px 0;">We look forward to partnering with ${esc(customerData.businessName)} and contributing to your continued success.</p>
           
           <p style="margin: 20px 0;">Best regards,<br><strong>The AlloB Consultants Team</strong><br><em>Integrity and Innovation</em></p>
         </div>
@@ -422,15 +423,15 @@ export async function sendEmails(checkoutData: CheckoutRequest): Promise<EmailRe
       },
       to: process.env.SALES_EMAIL || 'sales@allobconsultants.com',
       cc: process.env.SALES_CC_EMAIL || 'info@allobconsultants.com',
-      subject: `🎯 NEW ${packageInfo.name.toUpperCase()} REQUEST - ${customerData.businessName}`,
+      subject: `🎯 NEW ${packageInfo.name.toUpperCase()} REQUEST - ${esc(customerData.businessName)}`,
       html: salesEmailHTML,
       text: `NEW SERVICE PACKAGE REQUEST
 
-Package: ${packageInfo.name} (${packageInfo.price})
-Business: ${customerData.businessName}
-Contact: ${customerData.contactPerson}
-Email: ${customerData.email}
-Phone: ${customerData.phone}
+Package: ${esc(packageInfo.name)} (${esc(packageInfo.price)})
+Business: ${esc(customerData.businessName)}
+Contact: ${esc(customerData.contactPerson)}
+Email: ${esc(customerData.email)}
+Phone: ${esc(customerData.phone)}
 Industry: ${customerData.industry || 'Not specified'}
 Location: ${customerData.city || 'Not specified'}, ${customerData.province || 'Not specified'}
 Urgency: ${customerData.urgency || 'Not specified'}
@@ -447,16 +448,16 @@ Please follow up within 24 hours as promised to the customer.
         address: process.env.FROM_EMAIL || 'noreply@allobconsultants.com'
       },
       to: customerData.email,
-      subject: `Thank you for your interest in our ${packageInfo.name} - AlloB Consultants`,
+      subject: `Thank you for your interest in our ${esc(packageInfo.name)} - AlloB Consultants`,
       html: customerConfirmationHTML,
-      text: `Dear ${customerData.contactPerson},
+      text: `Dear ${esc(customerData.contactPerson)},
 
-Thank you for your interest in our ${packageInfo.name}!
+Thank you for your interest in our ${esc(packageInfo.name)}!
 
 We've received your request and our team will contact you within 24 hours to discuss your requirements and provide a customized proposal.
 
-Your selected package: ${packageInfo.name} - ${packageInfo.price}
-${packageInfo.description}
+Your selected package: ${esc(packageInfo.name)} - ${esc(packageInfo.price)}
+${esc(packageInfo.description)}
 
 What happens next:
 1. Personal consultation within 24 hours

@@ -1,6 +1,7 @@
 // pages/api/send-paye-report.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 import sgMail from '@sendgrid/mail';
+import { escapeHtml as esc } from '../../lib/validation';
 
 // Configure SendGrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
@@ -368,7 +369,7 @@ function generateEmailTemplate(reportData: PayeReportData): string {
                   <h2>Employment Information</h2>
                   ${inputData.employers.map((employer, index) => `
                       <div class="employer">
-                          <h4>${employer.name || `Employer ${index + 1}`}</h4>
+                          <h4>${esc(employer.name) || `Employer ${index + 1}`}</h4>
                           <p><strong>Income:</strong> ${formatCurrency(employer.income.amount)} (${employer.income.frequency})</p>
                           <p><strong>Pension:</strong> ${formatCurrency(employer.pensionContribution.amount)} (${employer.pensionContribution.frequency})</p>
                           <p><strong>Deductible Expenses:</strong> ${employer.hasDeductibleExpenses ? 
@@ -454,7 +455,7 @@ function generateEmailTemplate(reportData: PayeReportData): string {
               <div class="section">
                   <h2>Important Notes & Warnings</h2>
                   <ul>
-                      ${results.warnings.map(warning => `<li style="color: #dc2626; font-weight: 500;">${warning}</li>`).join('')}
+                      ${results.warnings.map(warning => `<li style="color: #dc2626; font-weight: 500;">${esc(warning)}</li>`).join('')}
                   </ul>
               </div>
               ` : ''}
